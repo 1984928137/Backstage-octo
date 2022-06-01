@@ -1,0 +1,16 @@
+[
+    {"name":"镜子","price": 20,"address":"北京","createdatetime": new Date()
+    },
+    {"name":"床垫","price": 528,"address":"上海","createdatetime":new Date()
+    },
+    {"name":"休闲裤","price": 228,"address":"山东","createdatetime":new Date()
+    },
+    {"name":"杯子","price": 43,"address":"河北","createdatetime":new Date()
+    },
+    {"name":"电动车","price": 1424,"address":"广州","createdatetime":new Date()
+    },
+    {"name":"项链","price": 2375,"address":"杭州","createdatetime":new Date()
+    },
+    {"name":"玩具","price": 256,"address":"深圳","createdatetime":new Date()
+    }
+]
