@@ -2,11 +2,7 @@
   <div>
     <div>
       <div class="select-box">
-        <el-form
-          :inline="true"
-          :model="userQuireData"
-          class="demo-form-inline"
-        >
+        <el-form :inline="true" :model="userQuireData" class="demo-form-inline">
           <el-form-item label="标题">
             <el-input v-model="userQuireData.user" placeholder="搜索" />
           </el-form-item>
@@ -22,10 +18,7 @@
         </el-form>
       </div>
       <div class="select-table">
-        <el-table
-          :data="tableData[userData.page - 1]"
-          style="width: 100%"
-        >
+        <el-table :data="tableData[userData.page - 1]" style="width: 100%">
           <el-table-column prop="age" label="age" width="180" />
           <el-table-column prop="name" label="Name" width="180" />
           <el-table-column prop="address" label="Address" />
@@ -49,19 +42,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive,onBeforeMount, ref, toRefs } from "vue";
+import { defineComponent, reactive, onBeforeMount, ref, toRefs } from "vue";
 import { getUser } from "../../axios/api";
 import { InitUserData } from "../../TS/user";
 
 export default defineComponent({
   name: "user",
   setup() {
-      const data = reactive(new InitUserData())
-      onBeforeMount(async () => {
+    const data = reactive(new InitUserData());
+    onBeforeMount(async () => {
       console.log("onBeforeMount");
-      data.obj = await getUser(
-          ''
-      )
+      data.obj = await getUser("")
         .then((res) => {
           data.userData.count = res.data.result.length;
           data.splitArray(res.data.result);
@@ -72,7 +63,7 @@ export default defineComponent({
         });
     });
     return {
-        ...toRefs(data)
+      ...toRefs(data),
     };
   },
 });

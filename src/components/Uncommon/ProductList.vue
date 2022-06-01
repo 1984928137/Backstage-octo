@@ -35,24 +35,36 @@
         :default-sort="{ prop: 'price,address,name', order: 'descending' }"
       >
         <el-table-column type="selection" width="55" />
-        <el-table-column sortable  label="price" width="180" >
-           <template #default="scope">
-           <span v-show="!scope.row.isShow" >{{scope.row.price}}</span>
-            <el-input v-show="scope.row.isShow"  v-model="price[scope.$index].value"  placeholder="Please input" />
-          </template>
-          </el-table-column>
-        <el-table-column sortable  label="Name" width="180" >
+        <el-table-column sortable label="price" width="180">
           <template #default="scope">
-           <span v-show="!scope.row.isShow" >{{scope.row.name}}</span>
-            <el-input v-show="scope.row.isShow"  v-model="name[scope.$index].value"  placeholder="Please input" />
+            <span v-show="!scope.row.isShow">{{ scope.row.price }}</span>
+            <el-input
+              v-show="scope.row.isShow"
+              v-model="price[scope.$index].value"
+              placeholder="Please input"
+            />
           </template>
-          </el-table-column>
-        <el-table-column sortable label="Address" width="180" >
+        </el-table-column>
+        <el-table-column sortable label="Name" width="180">
           <template #default="scope">
-           <span v-show="!scope.row.isShow" >{{scope.row.address}}</span>
-            <el-input v-show="scope.row.isShow"  v-model="address[scope.$index].value"  placeholder="Please input" />
+            <span v-show="!scope.row.isShow">{{ scope.row.name }}</span>
+            <el-input
+              v-show="scope.row.isShow"
+              v-model="name[scope.$index].value"
+              placeholder="Please input"
+            />
           </template>
-          </el-table-column>
+        </el-table-column>
+        <el-table-column sortable label="Address" width="180">
+          <template #default="scope">
+            <span v-show="!scope.row.isShow">{{ scope.row.address }}</span>
+            <el-input
+              v-show="scope.row.isShow"
+              v-model="address[scope.$index].value"
+              placeholder="Please input"
+            />
+          </template>
+        </el-table-column>
         <el-table-column label="操作">
           <template #default="scope">
             <el-button size="small" @click="handleEdit(scope.$index, scope.row)"

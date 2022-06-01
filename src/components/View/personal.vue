@@ -1,21 +1,16 @@
 <template>
-    <div>
-
-    </div>
+  <div></div>
 </template>
 
 <script lang="ts">
-    import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, reactive, ref } from "vue";
 
-    export default defineComponent({
-        name:'',
-        setup() {
-            return {
-            }
-        }
-    })
+export default defineComponent({
+  name: "",
+  setup() {
+    return {};
+  },
+});
 </script>
 
-<style lang='scss' scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -10,7 +10,7 @@ const route = [
         component: () => import("../components/View/HomeView.vue"),
         // meta: { qss: false },
         props: true,
-        redirect:'/productlist',
+        redirect: '/productlist',
         children: [
             {
                 path: 'order',

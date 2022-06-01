@@ -22,11 +22,11 @@ const $http = axios.create({
 
 $http.interceptors.request.use(config => {
     config.headers = config.headers || {}
-    
+
     if (localStorage.getItem('token') && localStorage.getItem('token') != 'undefined') {
-        
+
         console.log(localStorage.getItem('token'))
-        config.headers.Authorization = "Bearer " +( localStorage.getItem('token') || '')
+        config.headers.Authorization = "Bearer " + (localStorage.getItem('token') || '')
     }
     return config
 })

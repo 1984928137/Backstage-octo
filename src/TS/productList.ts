@@ -72,7 +72,7 @@ class InitProduct {
     name3 = ref<string>()
     name4 = ref<string>()
     name5 = ref<string>()
-    
+
 
     price = reactive(
         [
@@ -86,12 +86,12 @@ class InitProduct {
 
     address = reactive(
         [
-        this.addre1,
-        this.addre2,
-        this.addre3,
-        this.addre4,
-        this.addre5
-    ]
+            this.addre1,
+            this.addre2,
+            this.addre3,
+            this.addre4,
+            this.addre5
+        ]
     )
 
     name = reactive(
@@ -169,9 +169,9 @@ class InitProduct {
     }
 
     handleEdit = (index: number, row: ProductListData) => {
-        
+
         row.isShow = true
-        this.price[index].value = row.price 
+        this.price[index].value = row.price
         this.name[index].value = row.name
         this.address[index].value = row.address
         // row._id == this.currentRow.value._id ? this.rowShow.value = true 

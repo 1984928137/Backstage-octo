@@ -1,32 +1,32 @@
 import { ref } from "vue";
 
-interface UserQuireData{
-    user:string,
-    region:string
+interface UserQuireData {
+    user: string,
+    region: string
 }
 
-interface UserData{
-    page:number,
-    count:number
+interface UserData {
+    page: number,
+    count: number
 }
 
 
 
 class InitUserData {
     // constructor(parameters) {
-        
+
     // }
-    userQuireData:UserQuireData = {
-        user:'',
-        region:''
+    userQuireData: UserQuireData = {
+        user: '',
+        region: ''
     }
 
-    userData:UserData ={
-        page:1,
-        count:0
+    userData: UserData = {
+        page: 1,
+        count: 0
     }
 
-    tableData  = ref<UserData[][]>(
+    tableData = ref<UserData[][]>(
         []
     )
 
@@ -37,11 +37,11 @@ class InitUserData {
     obj = ref<object>()
 
 
-    onSubmit = ()=>{
+    onSubmit = () => {
         console.log('submit!')
     }
 
-    handleCurrentChange = (val:number)=>{
+    handleCurrentChange = (val: number) => {
         console.log(val)
     }
 
