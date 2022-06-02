@@ -42,6 +42,16 @@ const route = [
                     // icon: 'List'
                 }
             },
+            {
+                path: 'role',
+                name: 'role',
+                component: () => import('../components/View/roleView.vue'),
+                meta: {
+                    // homeChildren: true,
+                    // title: '订单',
+                    // icon: 'List'
+                }
+            },
         ]
     },
     {

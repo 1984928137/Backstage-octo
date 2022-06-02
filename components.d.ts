@@ -37,6 +37,8 @@ declare module '@vue/runtime-core' {
     Order: typeof import('./src/components/Uncommon/Order.vue')['default']
     Personal: typeof import('./src/components/View/personal.vue')['default']
     ProductList: typeof import('./src/components/Uncommon/ProductList.vue')['default']
+    Role: typeof import('./src/components/View/role.vue')['default']
+    RoleView: typeof import('./src/components/View/roleView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Snake: typeof import('./src/components/Uncommon/Snake.vue')['default']

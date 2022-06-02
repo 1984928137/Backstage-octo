@@ -50,15 +50,11 @@
               <span>商品列表</span>
             </template>
 
-            <el-menu-item-group title="全部列表"> </el-menu-item-group>
+            <el-menu-item-group title="子列表"> </el-menu-item-group>
             <el-menu-item index="/productlist">商品</el-menu-item>
-            <el-sub-menu popper-class="its" index="1-4">
-              <template #title>
-                <span>用户</span>
-              </template>
-              <el-menu-item index="/user">item one</el-menu-item>
-              <el-menu-item index="1-4-2-1">item two</el-menu-item>
-            </el-sub-menu>
+
+            <el-menu-item index="/user">用户</el-menu-item>
+            <el-menu-item index="/role">角色</el-menu-item>
           </el-sub-menu>
           <el-menu-item
             v-for="(item, index) in router"

@@ -26,6 +26,7 @@
     <div class="select-table">
       <el-table
         ref="multipleTableRef"
+        row-class-name="table-heigth"
         :data="tableData[productListData.page - 1]"
         style="width: 100%"
         @selection-change="handleSelectionChange"
@@ -142,5 +143,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .select-table {
   height: 270px;
+}
+:deep(.table-heigth){
+  height: 50px;
 }
 </style>

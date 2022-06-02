@@ -7,21 +7,115 @@
             <el-input v-model="userQuireData.user" placeholder="搜索" />
           </el-form-item>
           <el-form-item label="详情">
-            <el-input v-model="userQuireData.region" placeholder="搜索">
-              <!-- <el-option label="Zone one" value="shanghai" /> -->
-              <!-- <el-option label="Zone two" value="beijing" /> -->
-            </el-input>
+            <el-select
+              v-model="userQuireData.region"
+              class="m-2"
+              placeholder="Select"
+              size="large"
+            >
+              <el-option
+                v-for="item in userData.options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">查询</el-button>
+            <el-button type="primary" @click="toggleSelection()"
+              >Clear selection</el-button
+            >
           </el-form-item>
         </el-form>
       </div>
       <div class="select-table">
-        <el-table :data="tableData[userData.page - 1]" style="width: 100%">
-          <el-table-column prop="age" label="age" width="180" />
-          <el-table-column prop="name" label="Name" width="180" />
-          <el-table-column prop="address" label="Address" />
+        <el-table
+          ref="userTableRef"
+          :data="tableData[userData.page - 1]"
+          style="width: 100%"
+          @selection-change="handleSelectionChange"
+          @current-change="handleCurrentChanges"
+          :default-sort="{ prop: 'price,address,name', order: 'descending' }"
+          highlight-current-row
+          row-class-name="table-heigth"
+        >
+          <el-table-column type="selection" width="55" />
+          <el-table-column label="age" width="180">
+            <template #default="scope">
+              <span v-show="!scope.row.isShow">{{ scope.row.age }}</span>
+              <el-input
+                v-show="scope.row.isShow"
+                v-model="age[scope.$index].value"
+                placeholder="Please input"
+              />
+            </template>
+          </el-table-column>
+          <el-table-column label="Name" width="180">
+            <template #default="scope">
+              <span v-show="!scope.row.isShow">{{ scope.row.name }}</span>
+              <el-input
+                v-show="scope.row.isShow"
+                v-model="name[scope.$index].value"
+                placeholder="Please input"
+              />
+            </template>
+          </el-table-column>
+          <el-table-column label="Address" width="180">
+            <template #default="scope">
+              <span v-show="!scope.row.isShow">{{ scope.row.address }}</span>
+              <el-input
+                v-show="scope.row.isShow"
+                v-model="address[scope.$index].value"
+                placeholder="Please input"
+              />
+            </template>
+          </el-table-column>
+          <el-table-column label="role">
+            <template #default="scope">
+              <span v-show="!scope.row.isShow">{{
+                scope.row.role == undefined
+                  ? scope.row.role
+                  : scope.row.role.toString()
+              }}</span>
+
+              <el-select
+                v-show="scope.row.isShow"
+                v-model="role[scope.$index].value"
+                multiple
+                placeholder="Select"
+                style="width: 240px"
+              >
+                <el-option
+                  v-for="item in userData.options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作">
+            <template #default="scope">
+              <el-button
+                size="small"
+                @click="handleEdit(scope.$index, scope.row)"
+                >编辑</el-button
+              >
+              <el-button
+                size="small"
+                type="danger"
+                @click="handleDelete(scope.$index, scope.row)"
+                >删除</el-button
+              >
+              <el-button
+                size="small"
+                type="success"
+                @click="confirm(scope.$index, scope.row)"
+                >确认</el-button
+              >
+            </template>
+          </el-table-column>
         </el-table>
       </div>
     </div>
@@ -69,4 +163,11 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.select-table {
+  height: 300px;
+}
+:deep(.table-heigth){
+  height: 50px;
+}
+</style>
