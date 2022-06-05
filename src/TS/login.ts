@@ -17,7 +17,8 @@ class InitData {
         userName: '',
         password: '',
     }
-
+    constructor(){
+    }
 
 
 

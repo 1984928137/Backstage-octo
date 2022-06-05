@@ -1,4 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteLocationRaw, RouteParamValueRaw, RouteRecordRaw } from 'vue-router'
+import { getRouter } from "../axios/api";
+const modules = import.meta.glob('../components/**/**.vue')
 
 
 // 引入组件
@@ -11,48 +13,7 @@ const route = [
         // meta: { qss: false },
         props: true,
         redirect: '/productlist',
-        children: [
-            {
-                path: 'order',
-                name: 'order',
-                component: () => import('../components/Uncommon/Order.vue'),
-                meta: {
-                    homeChildren: true,
-                    title: '订单',
-                    icon: 'List'
-                }
-            },
-            {
-                path: 'productlist',
-                name: 'productlist',
-                component: () => import('../components/Uncommon/ProductList.vue'),
-                meta: {
-                    // homeChildren: true,
-                    // title: '订单',
-                    // icon: 'List'
-                }
-            },
-            {
-                path: 'user',
-                name: 'user',
-                component: () => import('../components/Uncommon/User.vue'),
-                meta: {
-                    // homeChildren: true,
-                    // title: '订单',
-                    // icon: 'List'
-                }
-            },
-            {
-                path: 'role',
-                name: 'role',
-                component: () => import('../components/View/roleView.vue'),
-                meta: {
-                    // homeChildren: true,
-                    // title: '订单',
-                    // icon: 'List'
-                }
-            },
-        ]
+        // children:[]
     },
     {
         path: '/login',
@@ -73,6 +34,46 @@ const route = [
 const router = createRouter({
     history: createWebHistory(),
     routes: route
+})
+
+router.beforeEach(async (to, from) => {
+    const token: string | null = localStorage.getItem('token')
+    if (to.path !== '/login' && !token) {
+        return '/login'
+    } else if (to.path !== '/login' && token) {
+        if (router.getRoutes().length === 3) {
+
+            const routerData: [] = await getRouter(
+                ''
+            ).then(
+                res => {
+                    return res.data.result;
+                }
+            ).catch(
+                err => {
+                    console.log(err)
+                }
+            )
+            console.log(routerData)
+            routerData.forEach((v: any) => {
+                const routerArr: RouteRecordRaw = {
+                    path: v.path.trim(),
+                    meta: {
+                        title: v.meta.title.trim(),
+                        icon: v.meta.icon.trim(),
+                        homeIsShow: v.meta.homeIsShow
+                    },
+                    name: v.name.trim(),
+                    // component: () => import("../components/`${v.component}`.vue")
+                    component: modules["../components" + `${v.component}` + ".vue"]
+                }
+                router.addRoute('home', routerArr)
+            });
+            router.replace(to.path)
+        }
+    } else if (to.path === '/login' && token) {
+        return '/'
+    }
 })
 
 export {

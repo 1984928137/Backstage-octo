@@ -45,11 +45,16 @@ const getRole = (data: LoginData | Object | null | string) => api('GET', "/api/g
 // 用户列表
 const getUser = (data: LoginData | Object | null | string) => api('GET', "/api/getUser", data)
 
+const authority = (data: LoginData | object | null | string) => api('GET',"/api/authority",data)
+
+const getRouter = (data: LoginData | object | null | string) => api('GET', "/api/getRouter", data)
 
 export {
     login,
     productData,
     productQuire,
     getRole,
-    getUser
+    getUser,
+    authority,
+    getRouter
 }

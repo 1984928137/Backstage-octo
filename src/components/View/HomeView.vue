@@ -34,7 +34,7 @@
           active-text-color="#ffd04b"
           background-color="#545c64"
           text-color="#fff"
-          default-active="1"
+          :default-active="route.path"
           class="el-menu-vertical-demo"
           :collapse="isCollapse"
           @open="handleOpen"
@@ -51,21 +51,18 @@
             </template>
 
             <el-menu-item-group title="子列表"> </el-menu-item-group>
-            <el-menu-item index="/productlist">商品</el-menu-item>
-
-            <el-menu-item index="/user">用户</el-menu-item>
-            <el-menu-item index="/role">角色</el-menu-item>
-          </el-sub-menu>
-          <el-menu-item
+            <el-menu-item
             v-for="(item, index) in router"
             :key="index"
             :index="item.path"
           >
             <el-icon>
-              <List />
+              <component :is="item.meta.icon" />
             </el-icon>
             <template #title>{{ item.meta.title }}</template>
           </el-menu-item>
+          </el-sub-menu>
+          
           <el-menu-item index="3">
             <el-icon>
               <!-- <document /> -->
@@ -96,6 +93,9 @@ import {
   Menu as IconMenu,
   List,
   Setting,
+  Avatar,
+  Unlock,
+  User,
 } from "@element-plus/icons-vue";
 import { InitHome } from "../../TS/home";
 
@@ -106,6 +106,9 @@ export default defineComponent({
     IconMenu,
     List,
     Setting,
+    Avatar,
+    Unlock,
+    User,
   },
   setup() {
     // const document = ref(new Document())
@@ -115,16 +118,18 @@ export default defineComponent({
       { type: "primary", text: "primary" },
     ];
     // const props = defineProps<{ msg: string }>()
+    const route = useRoute()
 
     const router = useRouter()
       .getRoutes()
-      .filter((v) => v.meta.homeChildren);
-    console.log(router[0].meta.homeChildren);
+      .filter((v) => v.meta.homeIsShow);
+    console.log(router[0].meta.homeIsShow);
 
     return {
       ...toRefs(data),
       buttons,
       router,
+      route
       // submitForm,
     };
   },
