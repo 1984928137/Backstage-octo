@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router'
 // import type{Router} from 'vue-router'
 import { ElMessage } from 'element-plus'
 
-const router = useRouter()
+// const router = useRouter()
 
 enum MESSAGE {
     "操作成功" = 200,
@@ -29,8 +29,7 @@ $http.interceptors.request.use(config => {
     config.headers = config.headers || {}
 
     if (localStorage.getItem('token') && localStorage.getItem('token') != 'undefined') {
-
-        console.log(localStorage.getItem('token'))
+        // console.log(localStorage.getItem('token'))
         config.headers.Authorization = "Bearer " + (localStorage.getItem('token') || '')
     }
     return config
@@ -54,7 +53,7 @@ $http.interceptors.response.use(res => {
         if (err.response.status == 401) {
             ElMessage.error('Token错误，请重新登录帐号')
             localStorage.removeItem('token')
-            router.replace('/login')
+            // router.replace('/login')
             console.log('401跳转', err)
             return
         } else {

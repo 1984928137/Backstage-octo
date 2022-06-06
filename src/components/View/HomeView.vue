@@ -5,18 +5,24 @@
         <el-col :span="4">
           <img class="header-logo" src="../../assets/img/logo.png" alt="" />
         </el-col>
-        <el-col :span="16">
+        <el-col :span="17">
           <h1>后台系统</h1>
         </el-col>
-        <el-col class="el-col-btn" :span="4">
+        <el-col class="el-col-btn" :span="3">
           <!-- <div class="grid-content bg-purple" /> -->
-          <el-dropdown split-button type="primary" @click="AvatarClick">
-            Dropdown List
+          <el-dropdown
+            size="large"
+            class="drop-A"
+            @command="clickCommand"
+            type="primary"
+            @click="AvatarClick"
+          >
+            <el-avatar :size="51" src="/src/assets/img/person2.jpeg" />
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item>Action 1</el-dropdown-item>
-                <el-dropdown-item>Action 2</el-dropdown-item>
-                <el-dropdown-item>Action 3</el-dropdown-item>
+                <el-dropdown-item command="/person">账户中心</el-dropdown-item>
+                <el-dropdown-item>消息通知</el-dropdown-item>
+                <el-dropdown-item>修改密码</el-dropdown-item>
                 <el-dropdown-item>Action 4</el-dropdown-item>
                 <el-dropdown-item>Action 5</el-dropdown-item>
               </el-dropdown-menu>
@@ -127,7 +133,7 @@ export default defineComponent({
     const data = reactive(new InitHome());
     const buttons = [
       //   { type: '', text: 'plain' },
-      { type: "primary", text: "primary" },
+      { type: "primary", text: "退出" },
     ];
     // const props = defineProps<{ msg: string }>()
     const route = useRoute();
@@ -135,7 +141,6 @@ export default defineComponent({
     const router = useRouter()
       .getRoutes()
       .filter((v) => v.meta.homeIsShow);
-    console.log(router[0].meta.homeIsShow);
 
     return {
       ...toRefs(data),
@@ -164,7 +169,7 @@ h1 {
 .el-col-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 .btn-text {
   padding: 8px 15px;

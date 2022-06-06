@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteLocationRaw, RouteParamValueRaw, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteLocationRaw, RouteParamValueRaw, RouteRecordRaw, useRouter } from 'vue-router'
 import { getRouter } from "../axios/api";
 const modules = import.meta.glob('../components/**/**.vue')
 
@@ -13,8 +13,9 @@ const route = [
         // meta: { qss: false },
         props: true,
         // redirect: '/productlist',
-        // children:[]
+        
     },
+    
     {
         path: '/login',
         name: 'login',
@@ -23,11 +24,19 @@ const route = [
         props: true
     },
     {
+        path: '/person',
+        name: 'person',
+        component: () => import("../components/View/personalView.vue"),
+        // meta: { qss: false },
+        props: true
+    },
+    {
         path: '/Snake',
         name: 'Snake',
         component: () => import("../components/Uncommon/Snake.vue"),
         meta: { qss: false },
-        props: true
+        props: true,
+
     },
 ]
 
@@ -37,9 +46,9 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from) => {
-    console.log(to.path)
     const token: string | null = localStorage.getItem('token')
     if (to.path !== '/login' && !token) {
+
         return '/login'
     } else if (to.path !== '/login' && token) {
         if (router.getRoutes().length === 3) {
@@ -48,12 +57,11 @@ router.beforeEach(async (to, from) => {
                 ''
             ).then(
                 res => {
-                    console.log(res)
                     return res.data.result;
                 }
             ).catch(
                 err => {
-                    console.log('axios-err',err)
+                    console.log('axios-err', err)
                 }
             )
             console.log(routerData)
@@ -69,11 +77,16 @@ router.beforeEach(async (to, from) => {
                     // component: () => import("../components/`${v.component}`.vue")
                     component: modules["../components" + `${v.component}` + ".vue"]
                 }
+                // router.getRoutes().filter(v => v.name == 'home')[0].children
                 router.addRoute('home', routerArr)
             });
+
+            router.getRoutes().filter(v => v.name == 'home')[0].redirect = "/order"
             router.replace(to.path)
+            // next({ ...to, replace: true })
+
         }
-    } 
+    }
     // else if (to.path === '/login' && token) {
     //     // return '/'
     //     // router.replace('/')
