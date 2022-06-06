@@ -45,13 +45,16 @@ const router = createRouter({
     routes: route
 })
 
+const InitRouteLength:number = route.length
+
+
 router.beforeEach(async (to, from) => {
     const token: string | null = localStorage.getItem('token')
     if (to.path !== '/login' && !token) {
 
         return '/login'
     } else if (to.path !== '/login' && token) {
-        if (router.getRoutes().length === 3) {
+        if (router.getRoutes().length <= InitRouteLength) {
 
             const routerData: [] = await getRouter(
                 ''
