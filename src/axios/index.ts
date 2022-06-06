@@ -1,11 +1,16 @@
 import axios from 'axios';
+import { useRouter } from 'vue-router'
+// import type{Router} from 'vue-router'
 import { ElMessage } from 'element-plus'
+
+const router = useRouter()
 
 enum MESSAGE {
     "操作成功" = 200,
     "密码错误" = 201,
     "帐号错误" = 202,
     "请求错误" = 203,
+    "token错误" = 401
 }
 
 
@@ -46,8 +51,17 @@ $http.interceptors.response.use(res => {
     return res.data
 },
     err => {
-        ElMessage.error('错误，数据获取失败，请检查你的网络是否正常')
-        console.log(err)
+        if (err.response.status == 401) {
+            ElMessage.error('Token错误，请重新登录帐号')
+            localStorage.removeItem('token')
+            router.replace('/login')
+            console.log('401跳转', err)
+            return
+        } else {
+            ElMessage.error('错误，数据获取失败，请检查你的网络是否正常')
+            console.log(err)
+        }
+
     })
 
 export {

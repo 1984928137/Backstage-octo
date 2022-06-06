@@ -12,7 +12,7 @@ const route = [
         component: () => import("../components/View/HomeView.vue"),
         // meta: { qss: false },
         props: true,
-        redirect: '/productlist',
+        // redirect: '/productlist',
         // children:[]
     },
     {
@@ -37,6 +37,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from) => {
+    console.log(to.path)
     const token: string | null = localStorage.getItem('token')
     if (to.path !== '/login' && !token) {
         return '/login'
@@ -47,11 +48,12 @@ router.beforeEach(async (to, from) => {
                 ''
             ).then(
                 res => {
+                    console.log(res)
                     return res.data.result;
                 }
             ).catch(
                 err => {
-                    console.log(err)
+                    console.log('axios-err',err)
                 }
             )
             console.log(routerData)
@@ -71,9 +73,12 @@ router.beforeEach(async (to, from) => {
             });
             router.replace(to.path)
         }
-    } else if (to.path === '/login' && token) {
-        return '/'
-    }
+    } 
+    // else if (to.path === '/login' && token) {
+    //     // return '/'
+    //     // router.replace('/')
+
+    // }
 })
 
 export {
