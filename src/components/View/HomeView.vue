@@ -10,6 +10,18 @@
         </el-col>
         <el-col class="el-col-btn" :span="4">
           <!-- <div class="grid-content bg-purple" /> -->
+          <el-dropdown split-button type="primary" @click="AvatarClick">
+            Dropdown List
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item>Action 1</el-dropdown-item>
+                <el-dropdown-item>Action 2</el-dropdown-item>
+                <el-dropdown-item>Action 3</el-dropdown-item>
+                <el-dropdown-item>Action 4</el-dropdown-item>
+                <el-dropdown-item>Action 5</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
           <el-button
             class="btn-text"
             v-for="button in buttons"
@@ -52,17 +64,17 @@
 
             <el-menu-item-group title="子列表"> </el-menu-item-group>
             <el-menu-item
-            v-for="(item, index) in router"
-            :key="index"
-            :index="item.path"
-          >
-            <el-icon>
-              <component :is="item.meta.icon" />
-            </el-icon>
-            <template #title>{{ item.meta.title }}</template>
-          </el-menu-item>
+              v-for="(item, index) in router"
+              :key="index"
+              :index="item.path"
+            >
+              <el-icon>
+                <component :is="item.meta.icon" />
+              </el-icon>
+              <template #title>{{ item.meta.title }}</template>
+            </el-menu-item>
           </el-sub-menu>
-          
+
           <el-menu-item index="3">
             <el-icon>
               <!-- <document /> -->
@@ -118,7 +130,7 @@ export default defineComponent({
       { type: "primary", text: "primary" },
     ];
     // const props = defineProps<{ msg: string }>()
-    const route = useRoute()
+    const route = useRoute();
 
     const router = useRouter()
       .getRoutes()
@@ -129,7 +141,7 @@ export default defineComponent({
       ...toRefs(data),
       buttons,
       router,
-      route
+      route,
       // submitForm,
     };
   },
