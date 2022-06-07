@@ -25,16 +25,6 @@ class InitAside {
     handleClose = (key: string, keyPath: string[]) => {
         console.log(key, keyPath)
     }
-
-    AvatarClick = () => {
-        // eslint-disable-next-line no-alert
-        alert('button click')
-    }
-    clickCommand = (command: string | number | object) => {
-        console.log(command)
-        typeof (command) == 'string' ? this.router.push(command)
-            : false
-    }
 }
 
 
