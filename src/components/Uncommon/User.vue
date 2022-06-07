@@ -165,7 +165,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .select-table {
-  height: 300px;
+  height: 350px;
 }
 :deep(.table-heigth){
   height: 50px;

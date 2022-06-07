@@ -5,6 +5,7 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Aside: typeof import('./src/components/common_cpn/aside.vue')['default']
     Com_button: typeof import('./src/components/common_cpn/com_button.vue')['default']
     Csj: typeof import('./src/components/Uncommon/csj.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
@@ -36,7 +37,10 @@ declare module '@vue/runtime-core' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTree: typeof import('element-plus/es')['ElTree']
+    Header: typeof import('./src/components/common_cpn/header.vue')['default']
     HomeView: typeof import('./src/components/View/HomeView.vue')['default']
+    'HomeView copy': typeof import('./src/components/View/HomeView copy.vue')['default']
+    ListView: typeof import('./src/components/View/ListView.vue')['default']
     LoginView: typeof import('./src/components/View/loginView.vue')['default']
     'LoginView copy': typeof import('./src/components/loginView copy.vue')['default']
     'LoginView copy 2': typeof import('./src/components/View/loginView copy 2.vue')['default']

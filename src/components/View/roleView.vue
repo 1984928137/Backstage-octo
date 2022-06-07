@@ -170,4 +170,11 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+:deep(.table-heigth){
+  height: 50px;
+}
+.select-table {
+  height: 350px;
+}
+</style>
