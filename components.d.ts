@@ -6,8 +6,10 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Aside: typeof import('./src/components/common_cpn/aside.vue')['default']
+    Basic: typeof import('./src/components/Uncommon/person/basic.vue')['default']
     Com_button: typeof import('./src/components/common_cpn/com_button.vue')['default']
     Csj: typeof import('./src/components/Uncommon/csj.vue')['default']
+    Eilme: typeof import('./src/components/Uncommon/person/Eilme.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -44,10 +46,12 @@ declare module '@vue/runtime-core' {
     LoginView: typeof import('./src/components/View/loginView.vue')['default']
     'LoginView copy': typeof import('./src/components/loginView copy.vue')['default']
     'LoginView copy 2': typeof import('./src/components/View/loginView copy 2.vue')['default']
+    Message: typeof import('./src/components/Uncommon/person/message.vue')['default']
     Order: typeof import('./src/components/Uncommon/Order.vue')['default']
     PermissionModification: typeof import('./src/components/Uncommon/PermissionModification.vue')['default']
     Personal: typeof import('./src/components/View/personal.vue')['default']
     PersonalView: typeof import('./src/components/View/personalView.vue')['default']
+    Plone: typeof import('./src/components/Uncommon/person/plone.vue')['default']
     ProductList: typeof import('./src/components/Uncommon/ProductList.vue')['default']
     Role: typeof import('./src/components/View/role.vue')['default']
     RoleView: typeof import('./src/components/View/roleView.vue')['default']
@@ -55,6 +59,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     Snake: typeof import('./src/components/Uncommon/Snake.vue')['default']
     UpdataP: typeof import('./src/components/Uncommon/updataP.vue')['default']
+    UpdataPwd: typeof import('./src/components/Uncommon/person/updataPwd.vue')['default']
     User: typeof import('./src/components/Uncommon/User.vue')['default']
   }
 }
