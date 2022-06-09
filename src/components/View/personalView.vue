@@ -36,7 +36,7 @@
           unique-opened
           router
         >
-          <el-sub-menu index="productlist">
+          <!-- <el-sub-menu index="productlist">
             <template #title>
               <el-icon>
                 <icon-menu />
@@ -45,7 +45,7 @@
             </template>
 
             <el-menu-item-group title="子列表"> </el-menu-item-group>
-            <!-- <el-menu-item
+             <el-menu-item
               v-for="(item, index) in router"
               :key="index"
               :index="item.path"
@@ -54,8 +54,17 @@
                 <component :is="item.meta.icon" />
               </el-icon>
               <template #title>{{ item.meta.title }}</template>
-            </el-menu-item> -->
-          </el-sub-menu>
+            </el-menu-item> 
+          </el-sub-menu> -->
+
+          <el-menu-item index="/basic">
+            <el-icon>
+              <icon-menu />
+            </el-icon>
+            <template #title>
+              <span>帐号管理</span>
+            </template>
+          </el-menu-item>
 
           <el-menu-item index="3">
             <el-icon>
@@ -84,7 +93,9 @@
           </el-menu-item>
         </el-menu>
       </el-aside>
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
   <!-- </div> -->
@@ -127,7 +138,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
 }
-.el-main{
+.el-main {
   margin: 0;
   padding: 0;
 }

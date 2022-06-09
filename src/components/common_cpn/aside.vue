@@ -66,7 +66,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from "vue";
-import { InitAside } from "../../TS/common/aside";
+import { InitAside } from "../../TS/commons/aside";
 import {
   Document,
   Menu as IconMenu,

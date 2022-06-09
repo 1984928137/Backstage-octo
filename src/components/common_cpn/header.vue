@@ -48,7 +48,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRef, ref, toRefs, watch } from "vue";
 import { RouteLocationRaw, useRoute } from "vue-router";
-import { InitHead } from "../../TS/common/header";
+import { InitHead } from "../../TS/commons/header";
 
 export default defineComponent({
   name: "",

@@ -28,7 +28,16 @@ const route = [
         name: 'person',
         component: () => import("../components/View/personalView.vue"),
         // meta: { qss: false },
-        props: true
+        props: true,
+        children:[
+            {
+                path: '/basic',
+                name: 'basic',
+                component: () => import("../components/Uncommon/person/basic.vue"),
+                // meta: { qss: false },
+                props: true
+            },
+        ]
     },
     {
         path: '/Snake',
