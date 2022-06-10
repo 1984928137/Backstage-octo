@@ -109,7 +109,7 @@ class InitData {
     submitForm = () => {
         this.basicFormRef.value?.validate((valid: unknown) => {
             if (valid) {
-                console.log('submit!')
+                console.log('submit!',this.basicForm)
 
                 //     login(
                 //         this.loginForm
