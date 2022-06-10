@@ -14,17 +14,17 @@
         class="loginForm"
       >
         <el-form-item label="帐号名" prop="userName">
-          <span :v-show="basicForm.isShow[0]">{{'ss'}}</span>
+          <span v-show="basicForm.isShow[0].value">{{'ss'}}</span>
           <el-input
-            :v-show="!basicForm.isShow[0]"
+            v-show="!basicForm.isShow[0].value"
             v-model="basicForm.userName"
             type="text"
             autocomplete="off"
           />
-          <el-button :v-show="basicForm.isShow[0]" class="sbt-btn1" type="primary" @click="submitForm()"
+          <el-button v-show="basicForm.isShow[0].value" class="sbt-btn1" type="primary" @click="submitForm()"
             >修改</el-button
           >
-          <el-button :v-show="!basicForm.isShow[0]" class="sbt-btn1" type="primary" @click="submitForm()"
+          <el-button v-show="!basicForm.isShow[0]" class="sbt-btn1" type="primary" @click="submitForm()"
             >确认</el-button
           >
         </el-form-item>
@@ -46,11 +46,11 @@
           </el-select>
         </el-form-item>
         <el-form-item label="Activity count" prop="count">
-          <el-select-v2
+          <!-- <el-select-v2
             v-model="basicForm.count"
             placeholder="Activity count"
             :options="options"
-          />
+          /> -->
         </el-form-item>
         <!-- 时间 -->
         <!-- <el-form-item label="Activity time" required>
@@ -120,29 +120,9 @@ export default defineComponent({
   setup() {
     const data = reactive(new InitData());
 
-    const rules = reactive({
-      userName: [
-        { required: true, message: "Please input 帐号", trigger: "blur" },
-        {
-          min: 6,
-          max: 20,
-          message: "字符长度在 6 to 20 之间",
-          trigger: "blur",
-        },
-      ],
-      password: [
-        { required: true, message: "Please input 密码", trigger: "blur" },
-        {
-          min: 8,
-          max: 15,
-          message: "字符长度在 8 to 15 之间",
-          trigger: "blur",
-        },
-      ],
-    });
+    
     return {
       ...toRefs(data),
-      rules,
     };
   },
 });
