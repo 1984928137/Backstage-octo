@@ -25,10 +25,10 @@
           <el-main><span>name</span></el-main>
         </el-container>
         <el-menu
-          active-text-color="rgb(126 190 255)"
+          active-text-color="rgb(126,190,255)"
           background-color="#545c64"
           text-color="#fff"
-          :default-active="1"
+          :default-active="route.path"
           class="el-menu-vertical-demo"
           :collapse="isCollapse"
           @open="handleOpen"
