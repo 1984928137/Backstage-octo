@@ -17,15 +17,15 @@ interface BasicForm {
     isShow: Ref<boolean>[],
     accountNumber: number,
     gender: Gender
-    count: number
+    count: string
     delivery: Ref<boolean>
-    type:[]
-    resource:string
-    desc:string
+    type: []
+    resource: string
+    desc: string
 }
 interface Option {
-    name: string,
-    num: number
+    value: string,
+    label: string
 }
 
 class InitData {
@@ -36,6 +36,7 @@ class InitData {
     isShow2: Ref<boolean> = ref(true)
     isShow3: Ref<boolean> = ref(true)
     options: Option[]
+    rules: {}
 
     basicForm: BasicForm = {
         userName: '',
@@ -47,23 +48,60 @@ class InitData {
         ]),
         accountNumber: 0o000000000,
         gender: Gender['中性'],
-        count: 0,
-        delivery:ref(false),
-        type:[],
-        resource:'',
-        desc:''
+        count: '',
+        delivery: ref(false),
+        type: [],
+        resource: '',
+        desc: ''
     }
     constructor() {
-        this.options = [
-            {
-                name: '老师',
-                num: 0
-            },
-            {
-                name: '学生',
-                num: 1
-            }
-        ]
+        this.options = Array.from({ length: 10 }).map((_, idx) => ({
+            value: `${idx + 1}`,
+            label: `${idx + 1}`,
+        }))
+        this.rules = reactive({
+            userName: [
+                { required: false, message: "Please input 帐号", trigger: "blur" },
+                {
+                    min: 6,
+                    max: 20,
+                    message: "字符长度在 6 to 20 之间",
+                    trigger: "blur",
+                },
+            ],
+            accountNumber: [
+                {
+                    required: false,
+                    message: 'Please select Activity zone',
+                    trigger: 'change',
+                },
+            ],
+            count: [
+                {
+                    required: false,
+                    message: 'Please select Activity count',
+                    trigger: 'change',
+                },
+            ],
+            type: [
+                {
+                    type: 'array',
+                    required: false,
+                    message: 'Please select at least one activity type',
+                    trigger: 'change',
+                },
+            ],
+            resource: [
+                {
+                    required: false,
+                    message: 'Please select activity resource',
+                    trigger: 'change',
+                },
+            ],
+            desc: [
+                { required: false, message: 'Please input activity form', trigger: 'blur' },
+            ],
+        });
     }
 
 
@@ -95,7 +133,7 @@ class InitData {
         })
     }
 
-    resetForm = ()=>{
+    resetForm = () => {
         if (!this.basicFormRef.value) return
         this.basicFormRef.value?.resetFields()
     }
