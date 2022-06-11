@@ -137,6 +137,10 @@ class InitData {
         if (!this.basicFormRef.value) return
         this.basicFormRef.value?.resetFields()
     }
+
+    changeShow = (val:number)=>{
+        this.basicForm.isShow[val].value = !this.basicForm.isShow[val].value 
+    }
 }
 
 
