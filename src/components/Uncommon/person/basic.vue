@@ -24,7 +24,7 @@
           <el-button v-show="basicForm.isShow[0].value" class="sbt-btn1" type="primary" @click="changeShow(0)"
             >修改</el-button
           >
-          <el-button v-show="!basicForm.isShow[0]" class="sbt-btn1" type="primary" @click="changeShow(0)"
+          <el-button v-show="!basicForm.isShow[0].value" class="sbt-btn1" type="primary" @click="changeShow(0)"
             >确认</el-button
           >
         </el-form-item>
