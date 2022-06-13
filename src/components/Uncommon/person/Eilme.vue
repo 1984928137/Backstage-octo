@@ -1,6 +1,11 @@
 <template>
     <div>
-
+        绑定邮箱：
+        <el-input></el-input>
+        <div>
+            <el-input></el-input>
+            <el-button ></el-button>
+        </div>
     </div>
 </template>
 
