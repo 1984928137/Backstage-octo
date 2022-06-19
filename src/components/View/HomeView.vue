@@ -1,8 +1,6 @@
 <template>
-  <el-container>
-    <el-header>
+  <el-container class="personHead">
       <Header></Header>
-    </el-header>
     <el-container>
       <el-aside width="200px">
         <Aside></Aside>
@@ -44,10 +42,7 @@ export default defineComponent({
 .header-logo {
   height: 80px;
 }
-.el-header {
-  height: 80px;
-  background-color: rgb(110, 110, 110);
-}
+
 h1 {
   text-align: center;
   color: #fff;

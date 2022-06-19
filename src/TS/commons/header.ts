@@ -5,7 +5,9 @@ import { Router, useRouter } from 'vue-router'
 
 interface BtnType {
     type: string,
-    text: string
+    text: string,
+    click: Function
+    show: Ref
 }
 
 class InitHead {
@@ -15,7 +17,24 @@ class InitHead {
     constructor() {
         this.buttons = [
             //   { type: '', text: 'plain' },
-            { type: "primary", text: "退出" },
+            {
+                type: "primary",
+                text: "返回首页",
+                click: this.backHome,
+                show: this.backHomeShow
+            },
+            {
+                type: "primary",
+                text: "退出登录",
+                click: () => { },
+                show: this.btnShow
+            },
+            {
+                type: "primary",
+                text: "立即注册",
+                click: () => { },
+                show: this.btnShow
+            }
         ]
 
         // this.avatarShow = ref<boolean>(true)
@@ -25,6 +44,9 @@ class InitHead {
 
     }
 
+    val: Ref<string> = ref('后台系统')
+    backHomeShow: Ref<boolean> = ref(false)
+    btnShow: Ref<boolean> = ref(true)
 
 
     AvatarClick = () => {
@@ -33,12 +55,24 @@ class InitHead {
     }
     clickCommand = (command: string | number | object) => {
         console.log(command)
-        typeof (command) == 'string' ? this.router.push(command)
+        typeof (command) == 'string' ? this.router.push({
+            path: command,
+            params: {
+                val: '个人中心'
+            }
+        })
             : false
     }
 
     changeShow = (val: boolean) => {
         this.avatarShow.value = val
+    }
+
+    backHome = () => {
+        console.log('backHome')
+        this.router.push({
+            path: '/'
+        })
     }
 }
 

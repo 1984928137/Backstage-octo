@@ -4,17 +4,18 @@
       <el-col :span="4">
         <img class="header-logo" src="../../assets/img/logo.png" alt="" />
       </el-col>
-      <el-col :span="17">
-        <h1>后台系统</h1>
+      <el-col :span="15">
+        <h1>{{ val }}</h1>
       </el-col>
-      <el-col class="el-col-btn" :span="3">
+      <el-col class="el-col-btn" :span="5">
         <!-- <div class="grid-content bg-purple" /> -->
         <el-dropdown
           size="large"
-          class="drop-A"
+          class="drop-Arav"
           @command="clickCommand"
           type="primary"
           @click="AvatarClick"
+          style="width: 90px;"
         >
           <el-avatar
             v-show="avatarShow"
@@ -32,14 +33,18 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <el-button
-          class="btn-text"
-          v-for="button in buttons"
-          :key="button.text"
-          :type="button.type"
-          text
-          >{{ button.text }}</el-button
-        >
+        <div class="btnBox">
+          <el-button
+            class="btn-text"
+            v-for="button in buttons"
+            :key="button.text"
+            :type="button.type"
+            text
+            @click="button.click"
+            v-show="button.show"
+            >{{ button.text }}</el-button
+          >
+        </div>
       </el-col>
     </el-row>
   </el-header>
@@ -47,13 +52,14 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRef, ref, toRefs, watch } from "vue";
-import { RouteLocationRaw, useRoute } from "vue-router";
+import { RouteLocationRaw, Router, useRoute, useRouter } from "vue-router";
 import { InitHead } from "../../TS/commons/header";
 
 export default defineComponent({
   name: "",
   setup() {
     const route: RouteLocationRaw = useRoute();
+    const router: Router = useRouter();
     const data = reactive(new InitHead());
     // const show = toRefs(data).avatarShow
     watch(
@@ -61,15 +67,17 @@ export default defineComponent({
       (to, from) => {
         if (to == "/person") {
           data.changeShow(false);
+          data.val = "个人中心";
+          data.backHomeShow = true;
         }
         if (from == "/person") {
           data.changeShow(true);
         }
-        console.log(to, from);
+        console.log(to, from, route.query);
       },
       {
         deep: true,
-        immediate:true
+        immediate: true,
       }
     );
     return {
@@ -87,6 +95,7 @@ export default defineComponent({
   height: 80px;
   background-color: rgb(110, 110, 110);
   width: 100%;
+  padding: 0px 20px 0px 20px;
 }
 h1 {
   text-align: center;
@@ -100,5 +109,16 @@ h1 {
 }
 .btn-text {
   padding: 8px 15px;
+  margin: 0;
+}
+.btnBox{
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin-left: 10px;
+}
+.drop-Arav{
+  display: flex;
+  justify-content: center;
 }
 </style>
