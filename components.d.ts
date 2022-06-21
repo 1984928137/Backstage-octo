@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
     Basic: typeof import('./src/components/Uncommon/person/basic.vue')['default']
     Com_button: typeof import('./src/components/common_cpn/com_button.vue')['default']
     Csj: typeof import('./src/components/Uncommon/csj.vue')['default']
+    Default: typeof import('./src/components/Uncommon/default.vue')['default']
     Eilme: typeof import('./src/components/Uncommon/person/Eilme.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']

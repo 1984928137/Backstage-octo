@@ -12,8 +12,16 @@ const route = [
         component: () => import("../components/View/HomeView.vue"),
         // meta: { qss: false },
         props: true,
-        // redirect: '/productlist',
-        
+        redirect: '/default',
+        children: [
+            {
+                path: '/default',
+                name: 'default',
+                component: () => import("../components/Uncommon/default.vue"),
+                // meta: { qss: false },
+                props: true
+            },
+        ]
     },
     
     {
@@ -54,17 +62,16 @@ const router = createRouter({
     routes: route
 })
 
-const InitRouteLength:number = route.length
+const InitRouteLength: number = router.getRoutes().length
 
 
 router.beforeEach(async (to, from) => {
     const token: string | null = localStorage.getItem('token')
     if (to.path !== '/login' && !token) {
-
         return '/login'
     } else if (to.path !== '/login' && token) {
+        console.log('5运行了', router.getRoutes().length, InitRouteLength)
         if (router.getRoutes().length <= InitRouteLength) {
-
             const routerData: [] = await getRouter(
                 ''
             ).then(
@@ -93,7 +100,7 @@ router.beforeEach(async (to, from) => {
                 router.addRoute('home', routerArr)
             });
 
-            router.getRoutes().filter(v => v.name == 'home')[0].redirect = "/order"
+            // router.getRoutes().filter(v => v.name == 'home')[0].redirect = "/order"
             router.replace(to.path)
             // next({ ...to, replace: true })
 
