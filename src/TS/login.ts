@@ -1,6 +1,7 @@
 import type { FormInstance } from 'element-plus';
 import { ref } from 'vue'
-import { login } from '../axios/api';
+import LocalCache from '../axios/cache';
+import { exRequest, LoginAPI } from '../axios/api';
 import { useRoute, useRouter } from 'vue-router';
 
 interface LoginForm {
@@ -12,36 +13,42 @@ class InitData {
     loginFormRef = ref<FormInstance>()
     route = useRoute()
     router = useRouter()
+    data: any
 
     loginForm: LoginForm = {
         userName: '',
         password: '',
     }
-    constructor(){
+    constructor() {
     }
 
+    resData() {
+        return exRequest.post({
+            url: LoginAPI.AccountLogin,
+            data: this.loginForm
+        })
+    }
 
-
-    submitForm = () => {
-        this.loginFormRef.value?.validate((valid: unknown) => {
+    submitForm = async () => {
+        this.loginFormRef.value?.validate(async (valid: unknown) => {
             if (valid) {
                 console.log('submit!'),
 
-                    login(
-                        this.loginForm
-                    ).then(
-                        res => {
-                            console.log(res.data)
+                    this.data = await this.resData()
+                // .then(
+                //     res => {
+                //         console.log(res)
 
-                            localStorage.setItem('token', res.data.token)
-                            console.log(localStorage.getItem('token'))
-                            return res
-                        }
-                    ).catch(err => {
-                        console.log(err)
-                    })
+                //         // LocalCache.setCache('token', res)
+                //         console.log(LocalCache.getCache('token'))
+                //         return res
+                //     }
+                // ).catch(err => {
+                //     console.log(err)
+                // })
+                console.log('data!', this.data)
 
-                this.router.push('/')
+                // this.router.push('/')
             } else {
                 console.log('error submit!')
                 return false

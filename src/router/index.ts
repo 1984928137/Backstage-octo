@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteLocationRaw, RouteParamValueRaw, RouteRecordRaw, useRouter } from 'vue-router'
-import { getRouter } from "../axios/api";
+import { exRequest,LoginAPI } from "../axios/api";
 const modules = import.meta.glob('../components/**/**.vue')
 
 
