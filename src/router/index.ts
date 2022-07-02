@@ -64,6 +64,20 @@ const router = createRouter({
 
 const InitRouteLength: number = router.getRoutes().length
 
+function getRouter(){
+    return exRequest.get({
+        url:LoginAPI.UserMenus
+    })
+}
+// .then(
+//     res => {
+//         return res.data.result;
+//     }
+// ).catch(
+//     err => {
+//         console.log('axios-err', err)
+//     }
+// )
 
 router.beforeEach(async (to, from) => {
     const token: string | null = localStorage.getItem('token')
@@ -72,17 +86,16 @@ router.beforeEach(async (to, from) => {
     } else if (to.path !== '/login' && token) {
         console.log('5运行了', router.getRoutes().length, InitRouteLength)
         if (router.getRoutes().length <= InitRouteLength) {
-            const routerData: [] = await getRouter(
-                ''
-            ).then(
-                res => {
-                    return res.data.result;
-                }
-            ).catch(
-                err => {
-                    console.log('axios-err', err)
-                }
-            )
+            const routerData: [] = await getRouter() as []
+            // .then(
+            //     res => {
+            //         return res.data.result;
+            //     }
+            // ).catch(
+            //     err => {
+            //         console.log('axios-err', err)
+            //     }
+            // )
             console.log(routerData)
             routerData.forEach((v: any) => {
                 const routerArr: RouteRecordRaw = {
