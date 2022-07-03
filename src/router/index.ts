@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteLocationRaw, RouteParamValueRaw, RouteRecordRaw, useRouter } from 'vue-router'
-import { exRequest,LoginAPI } from "../axios/api";
+import { exRequest,RouterAPI } from "../axios/api";
 const modules = import.meta.glob('../components/**/**.vue')
 
 
@@ -66,7 +66,8 @@ const InitRouteLength: number = router.getRoutes().length
 
 function getRouter(){
     return exRequest.get({
-        url:LoginAPI.UserMenus
+        url:RouterAPI.GetRouter,
+        data:''
     })
 }
 // .then(

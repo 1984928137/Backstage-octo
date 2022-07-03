@@ -2,10 +2,15 @@ import EXRequest from './index';
 import LocalCache from './cache';
 import * as qs from 'qs'
 
-enum LoginAPI {
-    AccountLogin = '/login',
+enum RouterAPI {
+    AccountLogin = '/users/login',
     LoginUserInfo = '/users/', // 用法: /users/1
-    UserMenus = '/role/' // 用法: /role/1/menu
+    UserMenus = '/api/getRole', // 用法: /api/getRole/1/menu
+    Product = '/api/product',
+    ProductQuire = '/api/productQuire',
+    GetUser = '/api/getUser',
+    Authority = '/api/authority',
+    GetRouter = '/api/getRouter'
 }
 
 interface HttpDefault {
@@ -93,5 +98,5 @@ const exRequest = new EXRequest({
 
 export {
     exRequest,
-    LoginAPI
+    RouterAPI
 }
