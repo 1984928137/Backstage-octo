@@ -113,7 +113,7 @@ import {
   ref,
   toRefs,
 } from "vue";
-import { productData } from "../../axios/api";
+import { exRequest,RouterAPI } from "../../axios/api";
 import { InitProduct } from "../../TS/productList";
 import type { ProductListData, ProductQuireData } from "../../TS/productList";
 
@@ -121,17 +121,23 @@ export default defineComponent({
   name: "ProductList",
   setup() {
     const data = reactive(new InitProduct());
+    function productData(){
+      return exRequest.get({
+        url:RouterAPI.Product,
+        data:''
+      })
+    }
     onBeforeMount(async () => {
       console.log("onBeforeMount");
       data.obj = await productData("")
-        .then((res) => {
-          data.productListData.count = res.data.result.length;
-          data.splitArray(res.data.result);
-          return res.data.result;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        // .then((res) => {
+        //   data.productListData.count = res.data.result.length;
+        //   data.splitArray(res.data.result);
+        //   return res.data.result;
+        // })
+        // .catch((err) => {
+        //   console.log(err);
+        // });
     });
     return {
       ...toRefs(data),
