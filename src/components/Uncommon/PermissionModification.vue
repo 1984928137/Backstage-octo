@@ -31,22 +31,28 @@
 <script lang="ts">
 import { defineComponent,onBeforeMount, reactive, ref, toRefs } from "vue";
 import { InitPermiss } from "../../TS/permissionModification";
-import { authority } from "../../axios/api";
+import { exRequest,RouterAPI } from "../../axios/api";
 
 export default defineComponent({
   name: "permission",
   setup() {
     const data = reactive(new InitPermiss());
+    function authority(){
+      return exRequest.get({
+        url:RouterAPI.Product,
+        data:''
+      })
+    }
     onBeforeMount(async () => {
       console.log("onBeforeMount");
-      data.obj = await authority("")
-        .then((res) => {
-            data.dataSource = res.data.result
-          return res.data.result;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      data.obj = await authority()
+        // .then((res) => {
+            data.dataSource = data.obj.result 
+        //   return res.data.result;
+        // })
+        // .catch((err) => {
+        //   console.log(err);
+        // });
     });
     return {
       ...toRefs(data),
