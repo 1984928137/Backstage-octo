@@ -1,5 +1,5 @@
 import { ref, reactive } from 'vue'
-import { productQuire } from "../axios/api";
+import { RouterAPI, exRequest } from "../axios/api";
 import type { ElTable } from "element-plus";
 import { ro } from 'element-plus/lib/locale';
 
@@ -27,6 +27,7 @@ class InitProduct {
     // constructor(parameters) {
 
     // }
+    data: any 
 
     multipleTableRef = ref<InstanceType<typeof ElTable>>()
 
@@ -113,25 +114,30 @@ class InitProduct {
     tableData = ref<ProductListData[][]>(
         []
     )
+    productQuire = () => {
+        // this.productQuireData
+        return exRequest.post({
+            url: RouterAPI.Product,
+            data: this.productQuireData
+        })
+    }
 
     onSubmit = async () => {
         console.log('submit!')
         if (!this.productQuireData.user && !this.productQuireData.region) {
             return
         }
-        this.obj = await productQuire(
-            this.productQuireData
-        )
-            .then(res => {
-                this.tableData.value = []
-                this.productListData.count = res.data.result.length == 'undefined' ? 1
-                    : res.data.result.length
-                this.splitArray(res.data.result)
-                return res.data.result
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        this.data = await this.productQuire()
+        // .then(res => {
+        this.tableData.value = []
+        this.productListData.count = this.data?.result.length == 'undefined' ? 1
+            : this.data?.result.length
+        this.splitArray(this.data?.result)
+        //     return res.data.result
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        // })
 
         // this.tableData = this.obj.value
         console.log('onSubmit', this.tableData.value)

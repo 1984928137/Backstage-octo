@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteLocationRaw, RouteParamValueRaw, RouteRecordRaw, useRouter } from 'vue-router'
-import { exRequest,RouterAPI } from "../axios/api";
+import { exRequest, RouterAPI } from "../axios/api";
 const modules = import.meta.glob('../components/**/**.vue')
 
 
@@ -23,7 +23,7 @@ const route = [
             },
         ]
     },
-    
+
     {
         path: '/login',
         name: 'login',
@@ -37,7 +37,7 @@ const route = [
         component: () => import("../components/View/personalView.vue"),
         // meta: { qss: false },
         props: true,
-        children:[
+        children: [
             {
                 path: '/basic',
                 name: 'basic',
@@ -64,10 +64,10 @@ const router = createRouter({
 
 const InitRouteLength: number = router.getRoutes().length
 
-function getRouter(){
+function getRouter() {
     return exRequest.get({
-        url:RouterAPI.GetRouter,
-        data:''
+        url: RouterAPI.GetRouter,
+        data: ''
     })
 }
 // .then(
@@ -87,7 +87,7 @@ router.beforeEach(async (to, from) => {
     } else if (to.path !== '/login' && token) {
         console.log('5运行了', router.getRoutes().length, InitRouteLength)
         if (router.getRoutes().length <= InitRouteLength) {
-            const routerData: [] = await getRouter() as []
+            const Data: any = await getRouter()
             // .then(
             //     res => {
             //         return res.data.result;
@@ -97,6 +97,7 @@ router.beforeEach(async (to, from) => {
             //         console.log('axios-err', err)
             //     }
             // )
+            const routerData: [] = Data.result
             console.log(routerData)
             routerData.forEach((v: any) => {
                 const routerArr: RouteRecordRaw = {

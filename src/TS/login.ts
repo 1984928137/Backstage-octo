@@ -1,7 +1,7 @@
 import type { FormInstance } from 'element-plus';
 import { ref } from 'vue'
 import LocalCache from '../axios/cache';
-import { exRequest, LoginAPI } from '../axios/api';
+import { exRequest, RouterAPI } from '../axios/api';
 import { useRoute, useRouter } from 'vue-router';
 
 interface LoginForm {
@@ -24,7 +24,7 @@ class InitData {
 
     resData() {
         return exRequest.post({
-            url: LoginAPI.AccountLogin,
+            url: RouterAPI.AccountLogin,
             data: this.loginForm
         })
     }

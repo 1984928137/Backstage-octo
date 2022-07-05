@@ -8,8 +8,12 @@
       margin-top: 17px;
     "
   >
-    <el-radio-button :label="false">展开</el-radio-button>
-    <el-radio-button :label="true">收起</el-radio-button>
+    <el-radio-button :label="false">
+      <el-icon><ArrowRightBold /></el-icon>
+    </el-radio-button>
+    <el-radio-button :label="true">
+      <el-icon><ArrowLeftBold /></el-icon>
+    </el-radio-button>
   </el-radio-group>
   <el-menu
     active-text-color="#ffd04b"
@@ -75,9 +79,10 @@ import {
   Avatar,
   Unlock,
   User,
-  House
+  House,
+  ArrowLeftBold,
+  ArrowRightBold,
 } from "@element-plus/icons-vue";
-
 
 export default defineComponent({
   name: "",
@@ -90,11 +95,13 @@ export default defineComponent({
     Unlock,
     User,
     House,
-},
+    ArrowLeftBold,
+    ArrowRightBold,
+  },
   setup() {
-      const data = reactive(new InitAside())
+    const data = reactive(new InitAside());
     return {
-        ...toRefs(data)
+      ...toRefs(data),
     };
   },
 });
