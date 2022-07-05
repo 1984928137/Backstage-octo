@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent,onBeforeMount, reactive, ref, toRefs } from "vue";
+import { defineComponent,onBeforeMount, reactive, Ref, ref, toRefs } from "vue";
 import { InitPermiss } from "../../TS/permissionModification";
 import { exRequest,RouterAPI } from "../../axios/api";
 
@@ -45,9 +45,10 @@ export default defineComponent({
     }
     onBeforeMount(async () => {
       console.log("onBeforeMount");
-      data.obj = await authority()
+      const routerData:Ref = ref()
+      routerData.value = await authority()
         // .then((res) => {
-            data.dataSource = data.obj.result 
+            data.dataSource = routerData.value?.result 
         //   return res.data.result;
         // })
         // .catch((err) => {

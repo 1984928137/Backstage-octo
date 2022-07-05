@@ -110,10 +110,11 @@ import {
   onBeforeUpdate,
   onUpdated,
   reactive,
+  Ref,
   ref,
   toRefs,
 } from "vue";
-import { exRequest,RouterAPI } from "../../axios/api";
+import { exRequest, RouterAPI } from "../../axios/api";
 import { InitProduct } from "../../TS/productList";
 import type { ProductListData, ProductQuireData } from "../../TS/productList";
 
@@ -121,23 +122,24 @@ export default defineComponent({
   name: "ProductList",
   setup() {
     const data = reactive(new InitProduct());
-    function productData(){
+    function productData() {
       return exRequest.get({
-        url:RouterAPI.Product,
-        data:''
-      })
+        url: RouterAPI.Product,
+        data: "",
+      });
     }
     onBeforeMount(async () => {
       console.log("onBeforeMount");
-      data.obj = await productData("")
-        // .then((res) => {
-        //   data.productListData.count = res.data.result.length;
-        //   data.splitArray(res.data.result);
-        //   return res.data.result;
-        // })
-        // .catch((err) => {
-        //   console.log(err);
-        // });
+      const routerData: Ref = ref();
+      routerData.value = await productData();
+      // .then((res) => {
+      data.productListData.count = routerData.value?.result.length;
+      data.splitArray(routerData.value?.result);
+      //   return res.data.result;
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
     });
     return {
       ...toRefs(data),
@@ -150,7 +152,7 @@ export default defineComponent({
 .select-table {
   height: 350px;
 }
-:deep(.table-heigth){
+:deep(.table-heigth) {
   height: 50px;
 }
 </style>
