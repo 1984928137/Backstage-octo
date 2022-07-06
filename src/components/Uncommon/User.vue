@@ -136,25 +136,39 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onBeforeMount, ref, toRefs } from "vue";
-import { getUser } from "../../axios/api";
+import {
+  defineComponent,
+  reactive,
+  onBeforeMount,
+  ref,
+  toRefs,
+  Ref,
+} from "vue";
+import { exRequest, RouterAPI } from "../../axios/api";
 import { InitUserData } from "../../TS/user";
 
 export default defineComponent({
   name: "user",
   setup() {
     const data = reactive(new InitUserData());
+    function getUser() {
+      return exRequest.get({
+        url: RouterAPI.GetUser,
+        data: "",
+      });
+    }
     onBeforeMount(async () => {
       console.log("onBeforeMount");
-      data.obj = await getUser("")
-        .then((res) => {
-          data.userData.count = res.data.result.length;
-          data.splitArray(res.data.result);
-          return res.data.result;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const routerData: Ref = ref();
+      routerData.value = await getUser();
+      // .then((res) => {
+      data.userData.count = routerData.value?.result.length;
+      data.splitArray(routerData.value?.result);
+      //   return res.data.result;
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
     });
     return {
       ...toRefs(data),
@@ -167,7 +181,7 @@ export default defineComponent({
 .select-table {
   height: 350px;
 }
-:deep(.table-heigth){
+:deep(.table-heigth) {
   height: 50px;
 }
 </style>
