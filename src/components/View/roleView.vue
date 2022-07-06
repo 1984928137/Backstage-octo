@@ -138,30 +138,47 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, reactive, ref, toRefs } from "vue";
-import { getRole } from "../../axios/api";
+import {
+  defineComponent,
+  onBeforeMount,
+  reactive,
+  Ref,
+  ref,
+  toRefs,
+} from "vue";
+import { exRequest, RouterAPI } from "../../axios/api";
 import { InitRole } from "../../TS/role";
 
 export default defineComponent({
   name: "",
   setup() {
     const data = reactive(new InitRole());
+    function getRole() {
+      return exRequest.get({
+        url: RouterAPI.UserMenus,
+        data: "",
+        params: "",
+      });
+    }
     onBeforeMount(async () => {
       console.log("onBeforeMount");
-      data.obj = await getRole("")
-        .then((res) => {
-          data.roleData.count = res.data.result.length;
-          for (let index = 0; index < res.data.result.length; index++) {
-            res.data.result[index].role = res.data.result[index].role
-              ?.toString()
-              .split(",");
-          }
-          data.splitArray(res.data.result);
-          return res.data.result;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const routerData: Ref = ref();
+      routerData.value = await getRole();
+      // .then((res) => {
+      data.roleData.count = routerData.value?.result.length;
+      for (let index = 0; index < routerData.value?.result.length; index++) {
+        routerData.value.result[index].role = routerData.value.result[
+          index
+        ].role
+          ?.toString()
+          .split(",");
+      }
+      data.splitArray(routerData.value.result);
+      //   return res.data.result;
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
     });
     return {
       ...toRefs(data),
@@ -171,7 +188,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-:deep(.table-heigth){
+:deep(.table-heigth) {
   height: 50px;
 }
 .select-table {
