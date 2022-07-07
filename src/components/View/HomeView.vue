@@ -2,7 +2,7 @@
   <el-container class="personHead">
       <Header></Header>
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="245px">
         <Aside></Aside>
       </el-aside>
       <el-main>

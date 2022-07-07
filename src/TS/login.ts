@@ -33,22 +33,20 @@ class InitData {
         this.loginFormRef.value?.validate(async (valid: unknown) => {
             if (valid) {
                 console.log('submit!'),
-
-                    this.data = await this.resData()
+                this.data = await this.resData()
                 // .then(
                 //     res => {
                 //         console.log(res)
-
-                //         // LocalCache.setCache('token', res)
-                //         console.log(LocalCache.getCache('token'))
+                console.log('data!', this.data.token)
+                LocalCache.setCache('token', this.data.token)
+                console.log(LocalCache.getCache('token'))
                 //         return res
                 //     }
                 // ).catch(err => {
                 //     console.log(err)
                 // })
-                console.log('data!', this.data)
 
-                // this.router.push('/')
+                this.router.push('/')
             } else {
                 console.log('error submit!')
                 return false

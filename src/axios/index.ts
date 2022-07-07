@@ -96,10 +96,10 @@ class EXRequest{
                     ElMessage.error(MESSAGE[code])
                     return res.data
                 }
-                ElMessage({
-                    message: 'Congrats, this is 获取成功.',
-                    type: 'success',
-                })
+                // ElMessage({
+                //     message: 'Congrats, this is 获取成功.',
+                //     type: 'success',
+                // })
                 return res.data
             },
             (err) => {
