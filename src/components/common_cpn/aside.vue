@@ -22,7 +22,7 @@
             <el-icon>
               <icon-menu />
             </el-icon>
-            <span>商品列表</span>
+            <span>事务处理</span>
           </template>
 
           <el-menu-item-group title="子列表"> </el-menu-item-group>
@@ -38,6 +38,13 @@
           </el-menu-item>
         </el-sub-menu>
 
+        <el-menu-item index="3">
+          <el-icon>
+            <!-- <document /> -->
+            <document></document>
+          </el-icon>
+          <template #title>任务管理</template>
+        </el-menu-item>
         <el-menu-item index="3">
           <el-icon>
             <!-- <document /> -->
