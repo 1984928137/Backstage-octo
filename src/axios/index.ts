@@ -92,6 +92,7 @@ class EXRequest{
                 // 将loading移除
                 this.loading?.close()
                 const code: number = res.status
+                // console.log('响应成功的状态码',code,res)
                 if (code !== 200) {
                     ElMessage.error(MESSAGE[code])
                     return res.data
@@ -112,6 +113,7 @@ class EXRequest{
                     console.log('无法找到网页')
                 }
                 if (err.response.status == 401) {
+
                     ElMessage.error('Token错误，请重新登录帐号')
                     localStorage.removeItem('token')
                     // router.replace('/login')
