@@ -2,6 +2,9 @@ import EXRequest from './index';
 import LocalCache from './cache';
 import * as qs from 'qs'
 
+import { ElMessage } from 'element-plus'
+
+
 enum RouterAPI {
     AccountLogin = '/users/login',
     LoginUserInfo = '/users/', // 用法: /users/1
@@ -56,6 +59,14 @@ const exRequest = new EXRequest({
         },
         responseInterceptorCatch: (err) => {
             console.log('响应失败的拦截')
+            if (err.response.status == 401) {
+
+                ElMessage.error('Token错误，请重新登录帐号')
+                localStorage.removeItem('token')
+                // router.replace('/login')
+                console.log('401跳转', err)
+                return err
+            }
             return err
         }
     }

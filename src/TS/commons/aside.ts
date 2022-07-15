@@ -10,7 +10,7 @@ class InitAside {
         this.route = useRoute();
         this.router = useRouter()
     }
-    router:Router
+    router: Router
     routerArr: RouteRecordNormalized[]
     avatar: string
     isCollapse: Ref<boolean>
@@ -27,8 +27,16 @@ class InitAside {
     }
 }
 
-
-
+// { "title" : "订单 " }, { $set: { "title" : "课程列表" } }
+// { "title" : "商品 " }, { $set: { "title" : "成绩管理" } }
+// { "title" : "用户 " }, { $set: { "title" : "成绩分析" } }
+// { "title" : "角色 " }, { $set: { "title" : "考试列表" } }
+// remove({"title" : "课程列表"})
+// { "path" : "order", "name" : "order", "component" : "/Uncommon/Order", "meta" : { "homeIsShow" : true, "title" : "课程列表", "icon" : "List" } }
+// { "path" : "productlist", "name" : "productlist", "component" : "/Uncommon/ProductList", "meta" : { "homeIsShow" : true, "title" : "成绩管理", "icon" : "icon-menu" } }
+// { "path" : "user", "name" : "user", "component" : "/Uncommon/User", "meta" : { "homeIsShow" : true, "title" : "成绩分析", "icon" : "User" } }
+// { "path" : "role", "name" : "role", "component" : "/View/roleView", "meta" : { "homeIsShow" : true, "title" : "考试列表", "icon" : "Avatar" } }
+// { "path" : "permission", "name" : "permission", "component" : "/Uncommon/PermissionModification", "meta" : { "homeIsShow" : false, "title" : "权限", "icon" : "Unlock" } }
 export {
     InitAside
 }

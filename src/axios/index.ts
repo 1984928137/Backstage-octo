@@ -26,14 +26,14 @@ interface EXRequestInterceptors<T = AxiosResponse> {
     responseInterceptorCatch?: (error: any) => any
 }
 
-interface EXTRequestConfig<T = AxiosResponse> extends AxiosRequestConfig{
+interface EXTRequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
     interceptors?: EXRequestInterceptors
     showLoading?: boolean,
 }
 
 
 
-class EXRequest{
+class EXRequest {
     instance: AxiosInstance
     interceptors?: EXRequestInterceptors
     showLoading: boolean
@@ -92,9 +92,16 @@ class EXRequest{
                 // 将loading移除
                 this.loading?.close()
                 const code: number = res.status
-                // console.log('响应成功的状态码',code,res)
+                // console.log('响应成功的状态码', code, res)
+                console.log('401跳转', MESSAGE[code])
                 if (code !== 200) {
-                    ElMessage.error(MESSAGE[code])
+                    if (code == 401) {
+                        // ElMessage.error('Token错误，请重新登录帐号')
+                        // localStorage.removeItem('token')
+                        // router.replace('/login')
+                        console.log('401跳转', MESSAGE[401])
+                        return res.data
+                    }
                     return res.data
                 }
                 // ElMessage({
@@ -129,7 +136,7 @@ class EXRequest{
     }
     request<T>(config: EXTRequestConfig): Promise<T> {
         return new Promise((resolve, reject) => {
-            
+
             if (config.interceptors?.requestInterceptor) {
                 config = config.interceptors.requestInterceptor(config)
             }
@@ -138,7 +145,7 @@ class EXRequest{
             if (config.showLoading === false) {
                 this.showLoading = config.showLoading
             }
-            
+
             this.instance
                 .request<any, T>(config)
                 .then((res) => {

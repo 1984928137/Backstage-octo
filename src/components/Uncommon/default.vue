@@ -1,11 +1,14 @@
 <template>
   <div>
-    default
+    <div>
+        <span>欢迎管理员：</span>
+        <span>当前时间：{{nowTime}}</span>
+    </div>
     <div>
       <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
         <el-tab-pane label="未处理事务" name="first">
           <div>
-              
+
           </div>
           未处理事务</el-tab-pane
         >
