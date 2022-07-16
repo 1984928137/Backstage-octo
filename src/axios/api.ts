@@ -3,6 +3,7 @@ import LocalCache from './cache';
 import * as qs from 'qs'
 
 import { ElMessage } from 'element-plus'
+// 在非组件成员中想要使用router,则需要导入router模块
 import { router } from "../router/index";
 
 
