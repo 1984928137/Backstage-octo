@@ -3,6 +3,7 @@ import LocalCache from './cache';
 import * as qs from 'qs'
 
 import { ElMessage } from 'element-plus'
+import { router } from "../router/index";
 
 
 enum RouterAPI {
@@ -35,6 +36,11 @@ const $http = {
     }
 }
 
+const setTime = () => window.location.reload()
+// const routers = router
+const tzRouter = () => router.push({ path: '/login' })
+
+
 const exRequest = new EXRequest({
     baseURL: $http.baseURL,
     timeout: $http.timeout,
@@ -61,10 +67,12 @@ const exRequest = new EXRequest({
             console.log('响应失败的拦截')
             if (err.response.status == 401) {
 
-                ElMessage.error('Token错误，请重新登录帐号')
+                ElMessage.error('帐号已过期，请重新登录帐号')
                 localStorage.removeItem('token')
                 // router.replace('/login')
+
                 console.log('401跳转', err)
+                setTimeout(tzRouter, 3000)
                 return err
             }
             return err

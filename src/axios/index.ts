@@ -93,7 +93,7 @@ class EXRequest {
                 this.loading?.close()
                 const code: number = res.status
                 // console.log('响应成功的状态码', code, res)
-                console.log('401跳转', MESSAGE[code])
+                console.log(MESSAGE[code])
                 if (code !== 200) {
                     if (code == 401) {
                         // ElMessage.error('Token错误，请重新登录帐号')
