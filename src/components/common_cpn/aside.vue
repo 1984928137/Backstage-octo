@@ -124,6 +124,7 @@ span.el-radio-button__inner {
 .el-aside {
   height: calc(100vh - 80px);
   width: 245px;
+  overflow:unset;
 }
 .el-main {
   height: calc(100vh - 80px);
