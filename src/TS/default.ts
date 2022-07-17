@@ -9,7 +9,6 @@ class InitData {
         this.activeName = ref('first')
         this.nowTime = ref(new Date())
     }
-
     handleClick = (tab: TabsPaneContext, event: Event) => {
         console.log(tab, event)
     }
