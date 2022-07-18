@@ -1,24 +1,36 @@
 
 
 class TimeInit {
+    year: string | number
+    month: string | number
+    day: string | number
+    hour: string | number
+    min: string | number
+    sec: string | number
     constructor() {
-
+        this.year = 0
+        this.month = 0
+        this.day = 0
+        this.hour = 0
+        this.min = 0
+        this.sec = 0
     }
     formatDate = (datetime: Date) => {
-        let year: number = datetime.getFullYear(),
-            month: string | number = (datetime.getMonth() + 1 < 10) ? '0' + (datetime.getMonth() + 1)
+        this.year = datetime.getFullYear(),
+            this.month = (datetime.getMonth() + 1 < 10) ? '0' + (datetime.getMonth() + 1)
                 : datetime.getMonth() + 1,
-            day: string | number = datetime.getDate() < 10 ? '0' + datetime.getDate()
+            this.day = datetime.getDate() < 10 ? '0' + datetime.getDate()
                 : datetime.getDate(),
-            hour: string | number = datetime.getHours() < 10 ? '0' + datetime.getHours()
+            this.hour = datetime.getHours() < 10 ? '0' + datetime.getHours()
                 : datetime.getHours(),
-            min: string | number = datetime.getMinutes() < 10 ? '0' + datetime.getMinutes()
+            this.min = datetime.getMinutes() < 10 ? '0' + datetime.getMinutes()
                 : datetime.getMinutes(),
-            sec: string | number = datetime.getSeconds() < 10 ? '0' + datetime.getSeconds()
+            this.sec = datetime.getSeconds() < 10 ? '0' + datetime.getSeconds()
                 : datetime.getSeconds();
-        return year + '-' + month + '-' + day + " " + hour + ':' + min + ':' + sec;
+        return this.year + '-' + this.month + '-' + this.day
+         + " " + this.hour + ':' + this.min + ':' + this.sec;
     }
-    nowDate = (params: string|number) => {
+    nowDate = (params: string | number) => {
         // let time1 = "2016-01-01 17:22:37";
         let date = typeof params == 'string' ? new Date(params.replace(/-/g, "/")) : new Date(params); //开始时间
         return date.getTime();
