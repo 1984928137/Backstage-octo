@@ -27,8 +27,14 @@ class TimeInit {
                 : datetime.getMinutes(),
             this.sec = datetime.getSeconds() < 10 ? '0' + datetime.getSeconds()
                 : datetime.getSeconds();
-        return this.year + '-' + this.month + '-' + this.day
-         + " " + this.hour + ':' + this.min + ':' + this.sec;
+        return [
+            this.year,
+            this.month,
+            this.day,
+            this.hour,
+            this.min,
+            this.sec
+        ]
     }
     nowDate = (params: string | number) => {
         // let time1 = "2016-01-01 17:22:37";
