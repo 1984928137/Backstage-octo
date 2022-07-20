@@ -38,14 +38,35 @@ class InitData {
         // this.setBackTime(nextTime);
 
         this.flipNode.value = document.querySelectorAll(".flip")
-        console.log(this.flipNode.value)
-        this.flipNode.value.forEach((element: any) => {
-            element!.classList.add("running");
+        this.flipNode.value.forEach((element: any, key: number) => {
+            if (key == 1 && this.ReTime.value[2] == '29'
+                && this.ReTime.value[3] == '23'
+                && this.ReTime.value[4] == '59'
+                && this.ReTime.value[5] == '59') {
+                element!.classList.add("running");
+            }
+            if (key == 2 && this.ReTime.value[3] == '23'
+                && this.ReTime.value[4] == '59'
+                && this.ReTime.value[5] == '59') {
+                element!.classList.add("running");
+            }
+            if (key == 3 && this.ReTime.value[4] == '59'
+                && this.ReTime.value[5] == '59') {
+                element!.classList.add("running");
+            }
+            if (key == 4 && this.ReTime.value[5] == '59') {
+                element!.classList.add("running");
+            }
+            if (key == 5) {
+                element!.classList.add("running");
+            }
         });
         // .classList.add("running");
         setTimeout(() => {
             this.flipNode.value.forEach((element: any) => {
-                element.classList.remove("running");
+                if (element.classList.length > 1) {
+                    element.classList.remove("running");
+                }
             });
             this.isFlipping = false;
             // this.setFrontTime(nextTime);
@@ -55,59 +76,9 @@ class InitData {
 
         }, this.duration);
     };
+
 }
 
-class Flipper {
-
-    // frontNode: HTMLElement | null
-    // backNode: HTMLElement | null
-    // constructor(node: HTMLElement, currentTime:string|number|[], nextTime:string|number|[]) {
-    //     this.isFlipping = false;
-    //     this.duration = 600;
-    //     this.flipNode = document.querySelector(".flip") as HTMLElement;
-    //     // this.frontNode = node.querySelector(".front");
-    //     // this.backNode = node.querySelector(".back");
-    //     // this.setFrontTime(currentTime);
-    //     // this.setBackTime(nextTime);
-    //     console.log(document.querySelector(".flip"))
-    // }
-    // setFrontTime =  (time :string|number) => {
-    //     this.frontNode !== null ? this.frontNode.dataset.number = time : this.frontNode
-    // };
-    // setBackTime =  (time:string|number|HTMLElement) => {
-    //     this.backNode !== null ? this.backNode.dataset.number = time : this.backNode
-    // };
-    // flipDown =  (currentTime: string | number | [], nextTime: string | number | []) => {
-    //     if (this.isFlipping) {
-    //         return false;
-    //     }
-    //     this.isFlipping = true;
-    //     // this.setFrontTime(currentTime);
-    //     // this.setBackTime(nextTime);
-    //     this.flipNode.classList.add("running");
-    //     setTimeout( () => {
-    //         this.flipNode.classList.remove("running");
-    //         this.isFlipping = false;
-    //         // this.setFrontTime(nextTime);
-    //     }, this.duration);
-    // };
-    // // 获取时间字符串
-    // getTimeFromDate =(date:Date)=> {
-    //     return date
-    //         .toTimeString()
-    //         .slice(0, 8)
-    //         .split(":")
-    //         .join("");
-    // };
-}
-
-
-
-
-// let now =new InitData().nowTime;
-// let nowTimeStr = getTimeFromDate(new Date(now.value.getTime() - 1000));
-// let nextTimeStr = getTimeFromDate(now);
-// let flippers = Array.from(flips).map(function (flip, i) { return new Flipper(flip, nowTimeStr[i], nextTimeStr[i]); });
 // setInterval(function () {
 //     let now = new Date();
 //     let nowTimeStr = getTimeFromDate(new Date(now.getTime() - 1000));

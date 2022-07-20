@@ -1,9 +1,36 @@
 <template>
   <div>
-    <div>
+    <div style="display: flex;align-items: center;">
       <span>欢迎管理员：, </span>
       <span>当前时间：</span>
       <div class="clock">
+        <div class="flip" style="width: 100px">
+          <div class="tText front" style="left: 15%" data-Time="00">
+            <span>{{ ReTime[0] }}</span>
+          </div>
+          <div class="tText back" style="left: 15%" data-Time="00">
+            <span>{{ NextTime[0] }}</span>
+          </div>
+        </div>
+        <em class="line"></em>
+        <div class="flip">
+          <div class="tText front" data-Time="00">
+            <span>{{ ReTime[1] }}</span>
+          </div>
+          <div class="tText back" data-Time="00">
+            <span>{{ NextTime[1] }}</span>
+          </div>
+        </div>
+        <em class="line"></em>
+        <div class="flip">
+          <div class="tText front" data-Time="00">
+            <span>{{ ReTime[2] }}</span>
+          </div>
+          <div class="tText back" data-Time="00">
+            <span>{{ NextTime[2] }}</span>
+          </div>
+        </div>
+        <em class="interval"></em>
         <div class="flip">
           <div class="tText front" data-Time="00">
             <span>{{ ReTime[3] }}</span>
@@ -11,8 +38,8 @@
           <div class="tText back" data-Time="00">
             <span>{{ NextTime[3] }}</span>
           </div>
-          <!-- <em class="line"></em> -->
         </div>
+        <em class="divider">:</em>
         <div class="flip">
           <div class="tText front" data-Time="00">
             <span>{{ ReTime[4] }}</span>
@@ -20,8 +47,8 @@
           <div class="tText back" data-Time="00">
             <span>{{ NextTime[4] }}</span>
           </div>
-          <!-- <em class="line"></em> -->
         </div>
+        <em class="divider">:</em>
         <div class="flip">
           <div class="tText front" data-Time="00">
             <span>{{ ReTime[5] }}</span>
@@ -29,7 +56,6 @@
           <div class="tText back" data-Time="00">
             <span>{{ NextTime[5] }}</span>
           </div>
-          <!-- <em class="line"></em> -->
         </div>
       </div>
     </div>
@@ -94,7 +120,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .clock {
   display: flex;
-
+  align-items: center;
   //   时钟框架盒子，相对定位，设置边框、字体、大小宽度长度、内外边距、颜色
   .flip {
     position: relative;
@@ -122,7 +148,7 @@ export default defineComponent({
       position: absolute;
       left: 20%;
       top: 10%;
-      border-bottom: 1px solid #666;
+      border-bottom: 1px solid rgb(120, 120, 120);
       border-radius: 10px 10px 0 0;
     }
     /* 翻页后的数字 */
@@ -147,17 +173,8 @@ export default defineComponent({
       opacity: 0;
       /* 180deg */
     }
-    // 数字中心的线条，可有可无
-    // .line {
-    //   bottom: 50%;
-    //   left: 0;
-    //   border-bottom: 2px solid rgb(100, 100, 100);
-    //   position: absolute;
-    //   z-index: 12;
-    //   width: 100%;
-    //   height: 2px;
-    // }
   }
+
   //   设置css动画效果，使用3维rotateX ， frontFlipDown是自定义css动画名称
   .flip.running {
     .front {
@@ -178,6 +195,25 @@ export default defineComponent({
       opacity: 0.8;
     }
   }
+  // 数字之间的线条，可有可无
+  .line {
+    border-bottom: 2px solid rgb(100, 100, 100);
+    width: 15px;
+    height: 2px;
+  }
+  .divider {
+    font-size: 36px;
+    // line-height: 102px;
+    width: 15px;
+    text-align: center;
+    font-style: normal;
+    color: rgb(51, 50, 50);
+    // height: 2px;
+  }
+//   
+.interval{
+    width: 20px;
+}
 }
 
 // .clock .flip .tText::before, .clock .flip .tText::after {
