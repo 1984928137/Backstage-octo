@@ -1,64 +1,66 @@
 <template>
   <div>
-    <div style="display: flex;align-items: center;">
+    <!-- 顶部 -->
+    <divn class="headBox">
       <span>欢迎管理员：, </span>
       <span>当前时间：</span>
       <div class="clock">
         <div class="flip" style="width: 100px">
-          <div class="tText front" style="left: 15%" data-Time="00">
+          <div class="tText front"  >
             <span>{{ ReTime[0] }}</span>
           </div>
-          <div class="tText back" style="left: 15%" data-Time="00">
+          <div class="tText back"  >
             <span>{{ NextTime[0] }}</span>
           </div>
         </div>
         <em class="line"></em>
         <div class="flip">
-          <div class="tText front" data-Time="00">
+          <div class="tText front" >
             <span>{{ ReTime[1] }}</span>
           </div>
-          <div class="tText back" data-Time="00">
+          <div class="tText back" >
             <span>{{ NextTime[1] }}</span>
           </div>
         </div>
         <em class="line"></em>
         <div class="flip">
-          <div class="tText front" data-Time="00">
+          <div class="tText front" >
             <span>{{ ReTime[2] }}</span>
           </div>
-          <div class="tText back" data-Time="00">
+          <div class="tText back" >
             <span>{{ NextTime[2] }}</span>
           </div>
         </div>
         <em class="interval"></em>
         <div class="flip">
-          <div class="tText front" data-Time="00">
+          <div class="tText front" >
             <span>{{ ReTime[3] }}</span>
           </div>
-          <div class="tText back" data-Time="00">
+          <div class="tText back" >
             <span>{{ NextTime[3] }}</span>
           </div>
         </div>
         <em class="divider">:</em>
         <div class="flip">
-          <div class="tText front" data-Time="00">
+          <div class="tText front" >
             <span>{{ ReTime[4] }}</span>
           </div>
-          <div class="tText back" data-Time="00">
+          <div class="tText back" >
             <span>{{ NextTime[4] }}</span>
           </div>
         </div>
         <em class="divider">:</em>
         <div class="flip">
-          <div class="tText front" data-Time="00">
+          <div class="tText front" >
             <span>{{ ReTime[5] }}</span>
           </div>
-          <div class="tText back" data-Time="00">
+          <div class="tText back" >
             <span>{{ NextTime[5] }}</span>
           </div>
         </div>
       </div>
-    </div>
+    </divn>
+    <!-- 导航部 -->
     <div>
       <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
         <el-tab-pane label="未处理事务" name="first">
@@ -78,6 +80,9 @@
         <span></span>
       </div>
     </div>
+
+    <!-- 底部 -->
+    <div></div>
   </div>
 </template>
 
@@ -118,6 +123,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.headBox {
+  display: flex;
+  align-items: center;
+}
 .clock {
   display: flex;
   align-items: center;
@@ -151,12 +160,18 @@ export default defineComponent({
       border-bottom: 1px solid rgb(120, 120, 120);
       border-radius: 10px 10px 0 0;
     }
+    .tText.front:first-child{
+        left: 15%;
+    }
     /* 翻页后的数字 */
     .tText.back {
       position: absolute;
       left: 20%;
       top: 10%;
       border-radius: 0 0 10px 10px;
+    }
+    .tText.back:first-child{
+        left: 15%;
     }
     // 翻页前的数字在前面
     .front {
@@ -210,10 +225,10 @@ export default defineComponent({
     color: rgb(51, 50, 50);
     // height: 2px;
   }
-//   
-.interval{
+  //
+  .interval {
     width: 20px;
-}
+  }
 }
 
 // .clock .flip .tText::before, .clock .flip .tText::after {
