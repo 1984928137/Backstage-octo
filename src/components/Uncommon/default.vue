@@ -6,62 +6,62 @@
       <span>当前时间：</span>
       <div class="clock">
         <div class="flip" style="width: 100px">
-          <div class="tText front"  >
+          <div class="tText front">
             <span>{{ ReTime[0] }}</span>
           </div>
-          <div class="tText back"  >
+          <div class="tText back">
             <span>{{ NextTime[0] }}</span>
           </div>
         </div>
         <em class="line"></em>
         <div class="flip">
-          <div class="tText front" >
+          <div class="tText front">
             <span>{{ ReTime[1] }}</span>
           </div>
-          <div class="tText back" >
+          <div class="tText back">
             <span>{{ NextTime[1] }}</span>
           </div>
         </div>
         <em class="line"></em>
         <div class="flip">
-          <div class="tText front" >
+          <div class="tText front">
             <span>{{ ReTime[2] }}</span>
           </div>
-          <div class="tText back" >
+          <div class="tText back">
             <span>{{ NextTime[2] }}</span>
           </div>
         </div>
         <em class="interval"></em>
         <div class="flip">
-          <div class="tText front" >
+          <div class="tText front">
             <span>{{ ReTime[3] }}</span>
           </div>
-          <div class="tText back" >
+          <div class="tText back">
             <span>{{ NextTime[3] }}</span>
           </div>
         </div>
         <em class="divider">:</em>
         <div class="flip">
-          <div class="tText front" >
+          <div class="tText front">
             <span>{{ ReTime[4] }}</span>
           </div>
-          <div class="tText back" >
+          <div class="tText back">
             <span>{{ NextTime[4] }}</span>
           </div>
         </div>
         <em class="divider">:</em>
         <div class="flip">
-          <div class="tText front" >
+          <div class="tText front">
             <span>{{ ReTime[5] }}</span>
           </div>
-          <div class="tText back" >
+          <div class="tText back">
             <span>{{ NextTime[5] }}</span>
           </div>
         </div>
       </div>
     </divn>
     <!-- 导航部 -->
-    <div>
+    <div style="height: 300px">
       <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
         <el-tab-pane label="未处理事务" name="first">
           <div></div>
@@ -82,7 +82,10 @@
     </div>
 
     <!-- 底部 -->
-    <div></div>
+    <div>
+      <el-icon><Guide /></el-icon>
+      <span>快捷入口</span>
+    </div>
   </div>
 </template>
 
@@ -90,9 +93,13 @@
 import { defineComponent, reactive, ref, toRefs } from "vue";
 import { InitData } from "../../TS/default";
 import { TimeInit } from "../../TS/commons/time";
+import { Guide } from "@element-plus/icons-vue";
 
 export default defineComponent({
   name: "",
+  components: {
+    Guide,
+  },
   setup() {
     const data = reactive(new InitData());
     const Time = reactive(new TimeInit());
@@ -160,9 +167,7 @@ export default defineComponent({
       border-bottom: 1px solid rgb(120, 120, 120);
       border-radius: 10px 10px 0 0;
     }
-    .tText.front:first-child{
-        left: 15%;
-    }
+
     /* 翻页后的数字 */
     .tText.back {
       position: absolute;
@@ -170,9 +175,9 @@ export default defineComponent({
       top: 10%;
       border-radius: 0 0 10px 10px;
     }
-    .tText.back:first-child{
-        left: 15%;
-    }
+    // .tText.back:first-child{
+    //     left: 15%;
+    // }
     // 翻页前的数字在前面
     .front {
       z-index: 4;
@@ -190,6 +195,14 @@ export default defineComponent({
     }
   }
 
+  .flip:first-child {
+    .tText.front {
+      left: 14%;
+    }
+    .tText.back {
+      left: 14%;
+    }
+  }
   //   设置css动画效果，使用3维rotateX ， frontFlipDown是自定义css动画名称
   .flip.running {
     .front {
@@ -207,7 +220,7 @@ export default defineComponent({
       -webkit-animation: backFlipDown 0.7s ease-in-out;
       animation: backFlipDown 0.7s ease-in-out;
       // 显示后面的数字
-      opacity: 0.8;
+      opacity: 0.6;
     }
   }
   // 数字之间的线条，可有可无
