@@ -94,7 +94,18 @@
         <span>快捷入口</span>
       </div>
       <div>
-
+        <ul class="fastUl" onclick="">
+          <li class="fastSearch">
+            <el-icon :size="80"><Search /></el-icon>
+            <span>成绩查询</span>
+          </li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -104,12 +115,13 @@
 import { defineComponent, reactive, ref, toRefs } from "vue";
 import { InitData } from "../../TS/default";
 import { TimeInit } from "../../TS/commons/time";
-import { Guide } from "@element-plus/icons-vue";
+import { Guide, Search } from "@element-plus/icons-vue";
 
 export default defineComponent({
   name: "",
   components: {
     Guide,
+    Search,
   },
   setup() {
     const data = reactive(new InitData());
@@ -258,14 +270,29 @@ export default defineComponent({
   }
 }
 
-.bottomBoxNav{
+.bottomBoxNav {
+  display: flex;
+  align-items: center;
+  .el-icon {
+    color: #409eff;
+    margin-right: 4px;
+  }
+}
+.fastUl {
+  display: flex;
+  flex-wrap: wrap;
+  //   .el-icon{
+  //        size: 100px;
+  //     }
+  .fastSearch {
+    width: 100px;
+    height: 100px;
     display: flex;
     align-items: center;
-    .el-icon{
-        color: #409eff;
-        margin-right: 4px;
-    }
+    flex-direction: column;
+  }
 }
+
 // .clock .flip .tText::before, .clock .flip .tText::after {
 //     // position: absolute;
 //     // content: attr(data-number);
