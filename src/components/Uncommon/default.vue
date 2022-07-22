@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="defBox">
     <!-- 顶部 -->
     <divn class="headBox">
       <span>欢迎管理员：, </span>
@@ -67,8 +67,14 @@
           <div></div>
           未处理事务</el-tab-pane
         >
-        <el-tab-pane label="处理进行中" name="second"> 处理进行中</el-tab-pane>
-        <el-tab-pane label="已完成任务" name="third"> 已完成任务</el-tab-pane>
+        <el-tab-pane label="处理进行中" name="second">
+          <div></div>
+          处理进行中</el-tab-pane
+        >
+        <el-tab-pane label="已完成任务" name="third">
+          <div></div>
+          已完成任务</el-tab-pane
+        >
       </el-tabs>
       <div>
         <span></span>
@@ -83,8 +89,13 @@
 
     <!-- 底部 -->
     <div>
-      <el-icon><Guide /></el-icon>
-      <span>快捷入口</span>
+      <div class="bottomBoxNav">
+        <el-icon><Guide /></el-icon>
+        <span>快捷入口</span>
+      </div>
+      <div>
+
+      </div>
     </div>
   </div>
 </template>
@@ -130,6 +141,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+// .defBox{
+//     background-color: #409eff;
+// }
 .headBox {
   display: flex;
   align-items: center;
@@ -244,6 +258,14 @@ export default defineComponent({
   }
 }
 
+.bottomBoxNav{
+    display: flex;
+    align-items: center;
+    .el-icon{
+        color: #409eff;
+        margin-right: 4px;
+    }
+}
 // .clock .flip .tText::before, .clock .flip .tText::after {
 //     // position: absolute;
 //     // content: attr(data-number);
