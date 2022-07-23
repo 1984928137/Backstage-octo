@@ -88,6 +88,26 @@ class InitData {
             path: '/productlist'
         })
     }
+    fastManagement = ()=>{
+        this.router.push({
+            path: '/productlist'
+        })
+    }
+    fastCalendar = ()=>{
+        this.router.push({
+            path: '/order'
+        })
+    }
+    fastTrendCharts = () => {
+        this.router.push({
+            path: '/user'
+        })
+    }
+    fastTrendC = () => {
+        this.router.push({
+            path: '/user'
+        })
+    }
 }
 
 // setInterval(function () {

@@ -68,6 +68,8 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Snake: typeof import('./src/components/Uncommon/Snake.vue')['default']
+    StudentList: typeof import('./src/components/Uncommon/studentList.vue')['default']
+    TeacherList: typeof import('./src/components/Uncommon/teacherList.vue')['default']
     UpdataP: typeof import('./src/components/Uncommon/updataP.vue')['default']
     UpdataPwd: typeof import('./src/components/Uncommon/person/updataPwd.vue')['default']
     User: typeof import('./src/components/Uncommon/User.vue')['default']

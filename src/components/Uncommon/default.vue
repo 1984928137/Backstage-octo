@@ -107,15 +107,15 @@
             <el-icon :size="iconSize"><Avatar /></el-icon>
             <span>老师列表</span>
           </li>
-          <li class="fastCalendar fastLi">
+          <li class="fastCalendar fastLi" @click="fastCalendar">
             <el-icon :size="iconSize"><Calendar /></el-icon>
             <span>课程管理</span>
           </li>
-          <li class="fastManagement fastLi">
+          <li class="fastManagement fastLi" @click="fastManagement">
             <el-icon :size="iconSize"><Management /></el-icon>
             <span>成绩管理</span>
           </li>
-          <li class="fastTrendCharts fastLi">
+          <li class="fastTrendCharts fastLi" @click="fastTrendCharts">
             <el-icon :size="iconSize"><TrendCharts /></el-icon>
             <span>总体分析</span>
           </li>
