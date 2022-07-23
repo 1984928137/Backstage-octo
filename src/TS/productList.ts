@@ -158,6 +158,7 @@ class InitProduct {
     }
 
     handleSelectionChange = (val: ProductListData[]) => {
+        console.log(val)
         this.multipleSelection.value = val
     }
 

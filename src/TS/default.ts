@@ -82,7 +82,7 @@ class InitData {
         }, this.duration);
     };
 
-    fastClick = () => {
+    fastSearchClick = () => {
         console.log('fastClick')
         this.router.push({
             path: '/productlist'
@@ -103,10 +103,23 @@ class InitData {
             path: '/user'
         })
     }
-    fastTrendC = () => {
+    fastTeacherList = () => {
         this.router.push({
-            path: '/user'
+            path: '/teacherList'
         })
+    }
+    fastStudentList = ()=>{
+        this.router.push({
+            path: '/studentList'
+        }) 
+    }
+    fastExamList = ()=>{
+        this.router.push({
+            path: '/role'
+        }) 
+    }
+    fastEdit = () => {
+        
     }
 }
 

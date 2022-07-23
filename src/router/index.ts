@@ -55,6 +55,14 @@ const route = [
         props: true,
 
     },
+    {
+        path: '/studentList',
+        name: 'studentList',
+        component: () => import("../components/Uncommon/studentList.vue"),
+        meta: { qss: false },
+        props: true,
+
+    },
 ]
 
 const router = createRouter({

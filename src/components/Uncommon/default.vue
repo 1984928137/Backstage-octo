@@ -95,15 +95,15 @@
       </div>
       <div>
         <ul class="fastUl">
-          <li class="fastSearch fastLi" @click="fastClick">
+          <li class="fastSearch fastLi" @click="fastSearchClick">
             <el-icon :size="iconSize"><Search /></el-icon>
             <span>成绩查询</span>
           </li>
-          <li class="fastUserFilled fastLi">
+          <li class="fastUserFilled fastLi" @click="fastStudentList">
             <el-icon :size="iconSize"><UserFilled /></el-icon>
             <span>学生列表</span>
           </li>
-          <li class="fastAvatar fastLi">
+          <li class="fastAvatar fastLi" @click="fastTeacherList">
             <el-icon :size="iconSize"><Avatar /></el-icon>
             <span>老师列表</span>
           </li>
@@ -119,11 +119,11 @@
             <el-icon :size="iconSize"><TrendCharts /></el-icon>
             <span>总体分析</span>
           </li>
-          <li class="fastEditPen fastLi">
+          <li class="fastEditPen fastLi" @click="fastExamList">
             <el-icon :size="iconSize"><EditPen /></el-icon>
             <span>考试列表</span>
           </li>
-          <li class="fastEdit fastLi">
+          <li class="fastEdit fastLi" >
             <el-icon  :size="iconSize"><Edit /></el-icon>
             <span>快捷管理</span>
           </li>
