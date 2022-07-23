@@ -52,12 +52,12 @@ const exRequest = new EXRequest({
             if (token) {
                 config.headers.Authorization = `Bearer ${token}`
             }
-            console.log('请求成功的拦截')
+            console.log('请求成功的拦截',token)
             return config
         },
 
         requestInterceptorCatch: (err) => {
-            console.log('请求失败的拦截')
+            console.log('请求失败的拦截',err)
             return err
         },
         responseInterceptor: (res) => {
@@ -65,7 +65,7 @@ const exRequest = new EXRequest({
             return res
         },
         responseInterceptorCatch: (err) => {
-            console.log('响应失败的拦截')
+            console.log('响应失败的拦截',err)
             if (err.response.status == 401) {
 
                 ElMessage.error('帐号已过期，请重新登录帐号')

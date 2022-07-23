@@ -1,7 +1,7 @@
 <template>
   <div class="defBox">
     <!-- 顶部 -->
-    <divn class="headBox">
+    <div class="headBox">
       <span>欢迎管理员：, </span>
       <span>当前时间：</span>
       <div class="clock">
@@ -59,7 +59,7 @@
           </div>
         </div>
       </div>
-    </divn>
+    </div>
     <!-- 导航部 -->
     <div style="height: 300px">
       <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
@@ -94,17 +94,39 @@
         <span>快捷入口</span>
       </div>
       <div>
-        <ul class="fastUl" onclick="">
-          <li class="fastSearch">
-            <el-icon :size="80"><Search /></el-icon>
+        <ul class="fastUl">
+          <li class="fastSearch fastLi" @click="fastClick">
+            <el-icon :size="iconSize"><Search /></el-icon>
             <span>成绩查询</span>
           </li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li class="fastUserFilled fastLi">
+            <el-icon :size="iconSize"><UserFilled /></el-icon>
+            <span>学生列表</span>
+          </li>
+          <li class="fastAvatar fastLi">
+            <el-icon :size="iconSize"><Avatar /></el-icon>
+            <span>老师列表</span>
+          </li>
+          <li class="fastCalendar fastLi">
+            <el-icon :size="iconSize"><Calendar /></el-icon>
+            <span>课程管理</span>
+          </li>
+          <li class="fastManagement fastLi">
+            <el-icon :size="iconSize"><Management /></el-icon>
+            <span>成绩管理</span>
+          </li>
+          <li class="fastTrendCharts fastLi">
+            <el-icon :size="iconSize"><TrendCharts /></el-icon>
+            <span>总体分析</span>
+          </li>
+          <li class="fastEditPen fastLi">
+            <el-icon :size="iconSize"><EditPen /></el-icon>
+            <span>考试列表</span>
+          </li>
+          <li class="fastEdit fastLi">
+            <el-icon  :size="iconSize"><Edit /></el-icon>
+            <span>快捷管理</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -115,13 +137,30 @@
 import { defineComponent, reactive, ref, toRefs } from "vue";
 import { InitData } from "../../TS/default";
 import { TimeInit } from "../../TS/commons/time";
-import { Guide, Search } from "@element-plus/icons-vue";
+import {
+  Guide,
+  Search,
+  Avatar,
+  UserFilled,
+  TrendCharts,
+  EditPen,
+  Management,
+  Calendar,
+  Edit,
+} from "@element-plus/icons-vue";
 
 export default defineComponent({
-  name: "",
+  name: "default",
   components: {
     Guide,
     Search,
+    Avatar,
+    UserFilled,
+    TrendCharts,
+    EditPen,
+    Management,
+    Calendar,
+    Edit,
   },
   setup() {
     const data = reactive(new InitData());
@@ -146,6 +185,9 @@ export default defineComponent({
       hour,
       min,
       sec,
+      Guide,
+      Search,
+      UserFilled
       //   nextTime,
     };
   },
@@ -284,13 +326,22 @@ export default defineComponent({
   //   .el-icon{
   //        size: 100px;
   //     }
-  .fastSearch {
-    width: 100px;
-    height: 100px;
+  .fastLi{
+    width: 150px;
+    height: 150px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin: 25px;
+    span{
+      margin-top: 10px;
+      font-weight: 600;
+      color: rgba(34, 49, 50, 0.819);
+    }
   }
+  // .fastSearch {
+  //   width: 100px;
+  // }
 }
 
 // .clock .flip .tText::before, .clock .flip .tText::after {

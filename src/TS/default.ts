@@ -1,6 +1,7 @@
 import { Ref, ref } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
 import { ElementTypes } from '@vue/compiler-core'
+import { Router, useRouter } from 'vue-router';
 import { TimeInit } from "./commons/time";
 
 
@@ -16,6 +17,8 @@ class InitData {
     nextTime: Ref<Date>
     ReTime: Ref<(string | number)[]>
     NextTime: Ref<(string | number)[]>
+    router: Router
+    iconSize: number
     constructor() {
         this.activeName = ref('first')
         this.nowTime = ref(new Date())
@@ -25,6 +28,8 @@ class InitData {
         this.flipNode = ref(document.querySelectorAll(".flip"))
         this.ReTime = ref(Time.formatDate(this.nextTime.value));
         this.NextTime = ref(Time.formatDate(this.nextTime.value));
+        this.router = useRouter()
+        this.iconSize = 110
     }
     handleClick = (tab: TabsPaneContext, event: Event) => {
         console.log(tab, event)
@@ -77,6 +82,12 @@ class InitData {
         }, this.duration);
     };
 
+    fastClick = () => {
+        console.log('fastClick')
+        this.router.push({
+            path: '/productlist'
+        })
+    }
 }
 
 // setInterval(function () {

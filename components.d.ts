@@ -71,6 +71,7 @@ declare module '@vue/runtime-core' {
     UpdataP: typeof import('./src/components/Uncommon/updataP.vue')['default']
     UpdataPwd: typeof import('./src/components/Uncommon/person/updataPwd.vue')['default']
     User: typeof import('./src/components/Uncommon/User.vue')['default']
+    Users: typeof import('./src/components/Uncommon/Users.vue')['default']
   }
 }
 

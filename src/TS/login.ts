@@ -39,7 +39,7 @@ class InitData {
                 //         console.log(res)
                 console.log('data!', this.data.token)
                 LocalCache.setCache('token', this.data.token)
-                console.log(LocalCache.getCache('token'))
+                console.log('login',LocalCache.getCache('token'))
                 //         return res
                 //     }
                 // ).catch(err => {
