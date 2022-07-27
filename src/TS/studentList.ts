@@ -1,5 +1,6 @@
 import { ref, Ref } from "vue"
 import type { ElTable } from "element-plus";
+import { RouterAPI, exRequest } from "../axios/api";
 
 interface QuireData {
     time?: string | number,
@@ -30,7 +31,7 @@ interface StudentList {
     boarding: string,
     page: number,
     count: number,
-    isShow:boolean
+    isShow: boolean
 }
 
 
@@ -40,10 +41,11 @@ class InitData {
     anyField: Ref<string | number>
     pageIndex: Ref<number>
     tableData: Ref<StudentList[][]>
-    multipleSelection : Ref<StudentList[]>
-    multipleTableRef :Ref
-    value : Ref<boolean>
-    currentRow :Ref<StudentList | undefined>
+    multipleSelection: Ref<StudentList[]>
+    multipleTableRef: Ref
+    value: Ref<boolean>
+    currentRow: Ref<StudentList | undefined>
+    data: any
 
     constructor() {
         this.quireData = ref<QuireData>(
@@ -69,7 +71,7 @@ class InitData {
             boarding: '',
             page: 1,
             count: 0,
-            isShow:true
+            isShow: true
         })
         this.anyField = ref<string | number>('')
         this.pageIndex = ref<number>(0)
@@ -83,7 +85,33 @@ class InitData {
 
     }
 
-    onQuireClick = () => {
+    productQuire = () => {
+        // this.productQuireData
+        return exRequest.post({
+            url: RouterAPI.Product,
+            data: this.quireData
+        })
+    }
+
+    onQuireClick = async () => {
+        console.log('submit!')
+        if (!this.quireData.value.id && !this.quireData.value.name) {
+            return
+        }
+        this.data = await this.productQuire()
+        // .then(res => {
+        this.tableData.value = []
+        this.studentListData.count = this.data?.result.length == 'undefined' ? 1
+            : this.data?.result.length
+        this.splitArray(this.data?.result)
+        //     return res.data.result
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        // })
+
+        // this.tableData = this.obj.value
+        console.log('onSubmit', this.tableData.value)
 
     }
     handleCurrentChange = (val: number) => {
@@ -104,13 +132,13 @@ class InitData {
         this.multipleSelection.value = val
     }
     handleCurrentChanges = (val: StudentList | undefined) => {
-        console.log(val,'566')
+        console.log(val, '566')
         this.currentRow.value = val
     }
     toggleSelection = (rows?: StudentList[]) => {
         if (rows) {
             rows.forEach((row) => {
-                
+
                 this.multipleTableRef.value!.toggleRowSelection(row, undefined)
             })
         } else {
@@ -123,7 +151,7 @@ class InitData {
         // this.[index].value = row.price
         // this.name[index].value = row.name
         // this.address[index].value = row.address
-        console.log(index,row)
+        console.log(index, row)
         // row._id == this.currentRow.value._id ? this.rowShow.value = true 
         // : this.rowShow.value = false
     }

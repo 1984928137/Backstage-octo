@@ -100,7 +100,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, toRefs } from "vue";
+import { defineComponent, onBeforeMount, reactive, Ref, ref, toRefs } from "vue";
+import { exRequest, RouterAPI } from "../../axios/api";
+
 import { InitData } from "../../TS/studentList";
 
 export default defineComponent({
@@ -108,6 +110,25 @@ export default defineComponent({
 
   setup() {
     const Data = reactive(new InitData());
+     function productData() {
+      return exRequest.get({
+        url: RouterAPI.Product,
+        data: "",
+      });
+    }
+    onBeforeMount(async () => {
+      console.log("onBeforeMount");
+      const routerData: Ref = ref();
+      routerData.value = await productData();
+      // .then((res) => {
+      Data.studentListData.count = routerData.value?.result.length;
+      Data.splitArray(routerData.value?.result);
+      //   return res.data.result;
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
+    });
     return {
       ...toRefs(Data),
     };
