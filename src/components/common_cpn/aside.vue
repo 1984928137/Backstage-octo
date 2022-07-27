@@ -22,7 +22,7 @@
             <el-icon>
               <icon-menu />
             </el-icon>
-            <span>事务处理</span>
+            <span>菜单列表</span>
           </template>
 
           <el-menu-item-group title="子列表"> </el-menu-item-group>
@@ -87,6 +87,13 @@ import {
   House,
   ArrowLeftBold,
   ArrowRightBold,
+  Guide,
+  Search,
+  UserFilled,
+  TrendCharts,
+  EditPen,
+  Management,
+  Calendar,
 } from "@element-plus/icons-vue";
 
 export default defineComponent({
@@ -102,6 +109,13 @@ export default defineComponent({
     House,
     ArrowLeftBold,
     ArrowRightBold,
+    UserFilled,
+    Guide,
+    Search,
+    TrendCharts,
+    EditPen,
+    Management,
+    Calendar,
   },
   setup() {
     const data = reactive(new InitAside());
@@ -124,15 +138,14 @@ span.el-radio-button__inner {
 .el-aside {
   height: calc(100vh - 80px);
   width: 245px;
-  overflow:unset;
+  overflow: unset;
 }
 .el-main {
   height: calc(100vh - 80px);
   overflow-y: auto;
 }
 
-.asideBox{
+.asideBox {
   display: flex;
-
 }
 </style>
