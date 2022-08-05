@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     Csj: typeof import('./src/components/Uncommon/csj.vue')['default']
     Default: typeof import('./src/components/Uncommon/default.vue')['default']
     Eilme: typeof import('./src/components/Uncommon/person/Eilme.vue')['default']
+    ElAffix: typeof import('element-plus/es')['ElAffix']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']

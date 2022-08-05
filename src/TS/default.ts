@@ -88,12 +88,12 @@ class InitData {
             path: '/productlist'
         })
     }
-    fastManagement = ()=>{
+    fastManagement = () => {
         this.router.push({
             path: '/productlist'
         })
     }
-    fastCalendar = ()=>{
+    fastCalendar = () => {
         this.router.push({
             path: '/order'
         })
@@ -108,18 +108,18 @@ class InitData {
             path: '/teacherList'
         })
     }
-    fastStudentList = ()=>{
+    fastStudentList = () => {
         this.router.push({
             path: '/studentList'
-        }) 
+        })
     }
-    fastExamList = ()=>{
+    fastExamList = () => {
         this.router.push({
             path: '/role'
-        }) 
+        })
     }
     fastEdit = () => {
-        
+
     }
 }
 
@@ -135,7 +135,30 @@ class InitData {
 //     }
 // }, 1000);
 
-
-export {
-    InitData,
-}
+// {"studentID":"1427888686","name":"朱小二","nationality":"汉","phone":"15208905451","boarding":"0","sex":"1", "role":"学生","time":"1995-10-12","permission":[ 1, 2, 5, 4, 3, 7, 2 ],"createdatetime":new Date() }
+// {"studentID":"1272149249","name":"赵克罗","nationality":"汉","phone":"15507283417","boarding":"0","sex":"1", "role":"学生","time":"1995-08-01","permission":[ 1, 2, 5, 4, 3, 7, 2 ],"createdatetime":new Date() }
+// {"studentID":"1727242424","name":"刘仪伟","nationality":"汉","phone":"13906305059","boarding":"0","sex":"1", "role":"学生","time":"1995-03-10","permission":[ 1, 2, 5, 4, 3, 7, 2 ],"createdatetime":new Date() }
+// {"studentID":"1272424727","name":"帕塔亚","nationality":"汉","phone":"13602908793","boarding":"0","sex":"0", "role":"学生","time":"1995-07-11","permission":[ 1, 2, 5, 4, 3, 7, 2 ],"createdatetime":new Date() }
+// {"studentID":"1228428382","name":"姚一林","nationality":"汉","phone":"13708109734","boarding":"0","sex":"1", "role":"学生","time":"1995-02-27","permission":[ 1, 2, 5, 4, 3, 7, 2 ],"createdatetime":new Date() }
+// {"studentID":"1274274211","name":"田微荣","nationality":"汉","phone":"14418906473","boarding":"0","sex":"1", "role":"学生","time":"1995-08-18","permission":[ 1, 2, 5, 4, 3, 7, 2 ],"createdatetime":new Date() }
+// {"studentID":"1425282220","name":"许歌间","nationality":"汉","phone":"13603084249","boarding":"0","sex":"1", "role":"学生","time":"1996-06-21","permission":[ 1, 2, 5, 4, 3, 7, 2 ],"createdatetime":new Date() }
+    interface StudentList {
+        // 出生时间
+        time: string,
+        name: string,
+        id: number | string,
+        // 学号
+        studentID: number | string,
+        sex: number | string,
+        phone: number,
+        // 民族
+        nationality: string,
+        // 寄宿
+        boarding: string,
+        page: number,
+        count: number,
+        isShow: boolean
+    }
+    export {
+        InitData,
+    }

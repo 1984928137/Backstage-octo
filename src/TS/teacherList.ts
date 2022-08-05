@@ -38,7 +38,6 @@ interface StudentList {
 class InitData {
     quireData: Ref<QuireData>
     studentListData: Ref<StudentList>
-    studentQuierData: Ref<StudentList[]>
     anyField: Ref<string | number>
     pageIndex: Ref<number>
     tableData: Ref<StudentList[][]>
@@ -47,8 +46,6 @@ class InitData {
     value: Ref<boolean>
     currentRow: Ref<StudentList | undefined>
     data: any
-    dialogFormVisible:Ref<boolean>
-    formLabelWidth:string
 
     constructor() {
         this.quireData = ref<QuireData>(
@@ -77,8 +74,7 @@ class InitData {
             isShow: true
         })
         this.anyField = ref<string | number>('')
-        this.pageIndex = ref<number>(1)
-        this.studentQuierData = ref<StudentList[]>([])
+        this.pageIndex = ref<number>(0)
         this.tableData = ref<StudentList[][]>(
             []
         )
@@ -86,8 +82,6 @@ class InitData {
         this.multipleTableRef = ref<InstanceType<typeof ElTable>>()
         this.value = ref<boolean>(true)
         this.currentRow = ref<StudentList | undefined>()
-        this.dialogFormVisible = ref(false)
-        this.formLabelWidth = '140px'
 
     }
 
@@ -100,26 +94,25 @@ class InitData {
     }
 
     onQuireClick = async () => {
-        if (!this.quireData.value.studentID && !this.quireData.value.name) {
+        console.log('submit!')
+        if (!this.quireData.value.id && !this.quireData.value.name) {
             return
         }
-        console.log('onQuireClick!')
-        // this.data = await this.productQuire()
+        this.data = await this.productQuire()
         // .then(res => {
-        // this.tableData.value = []
-        // this.studentListData.count = this.data?.result.length == 'undefined' ? 1
-        //     : this.data?.result.length
-        // this.splitArray(this.data?.result)
+        this.tableData.value = []
+        this.studentListData.count = this.data?.result.length == 'undefined' ? 1
+            : this.data?.result.length
+        this.splitArray(this.data?.result)
         //     return res.data.result
         // })
         // .catch(err => {
         //     console.log(err)
         // })
-        let quireData = this.quireData.value.studentID ? this.studentQuierData.value.filter(v => v.studentID.toString().indexOf(this.quireData.value.studentID as string) != -1)
-            : this.studentQuierData.value.filter(v => v.name.indexOf(this.quireData.value.name as string) != -1)
-        this.tableData.value = []
-        this.splitArray(quireData)
-        this.studentListData.value.count = quireData.length
+
+        // this.tableData = this.obj.value
+        console.log('onSubmit', this.tableData.value)
+
     }
     handleCurrentChange = (val: number) => {
         this.pageIndex.value = val
@@ -164,9 +157,6 @@ class InitData {
     }
     handleDelete = (index: number, row: StudentList) => {
         console.log(index, row)
-    }
-    clickClose=()=>{
-
     }
 }
 

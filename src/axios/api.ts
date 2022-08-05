@@ -15,7 +15,8 @@ enum RouterAPI {
     ProductQuire = '/api/productQuire',
     GetUser = '/api/getUser',
     Authority = '/api/authority',
-    GetRouter = '/api/getRouter'
+    GetRouter = '/api/getRouter',
+    StudentList = "/api/studentList",
 }
 
 interface HttpDefault {

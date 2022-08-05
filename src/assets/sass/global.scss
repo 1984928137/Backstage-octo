@@ -25,6 +25,14 @@ body{
   overflow:unset;
 }
 
+
+.example-pagination-block{
+  display: flex;
+  justify-content: center;
+}
+
+
+
 @-webkit-keyframes frontFlipDown {
   to {
     -webkit-transform: rotateX(180deg);
