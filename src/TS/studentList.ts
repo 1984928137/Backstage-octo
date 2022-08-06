@@ -1,4 +1,4 @@
-import { ref, Ref } from "vue"
+import { ref, Ref, toRefs } from "vue"
 import type { ElTable } from "element-plus";
 import { RouterAPI, exRequest } from "../axios/api";
 
@@ -32,6 +32,28 @@ interface StudentList {
     page: number,
     count: number,
     isShow: boolean
+    // 身份证号
+    IDcard?:string
+    // 户口类型
+    accountType?:string
+    // 户口所在地
+    accountLocation?:string
+    // 家庭经济情况
+    familyFinancialSituation?:string
+    // 户籍
+    censusRegister?:string
+    // 现住址
+    currentAddress?:string
+    // 是否留守儿童
+    whetherChildren?:boolean
+    // 留守儿童
+    behindChildren?:string
+    // 家庭成员
+    familyMember?:unknown
+    // 获奖情况
+    awards?:string
+    // 特长
+    specialty?:string
 }
 
 
@@ -47,8 +69,10 @@ class InitData {
     value: Ref<boolean>
     currentRow: Ref<StudentList | undefined>
     data: any
-    dialogFormVisible:Ref<boolean>
-    formLabelWidth:string
+    dialogFormVisible: Ref<boolean>
+    formLabelWidth: string
+    formDataCount: Ref<number>
+    formData: StudentList
 
     constructor() {
         this.quireData = ref<QuireData>(
@@ -78,8 +102,8 @@ class InitData {
         })
         this.anyField = ref<string | number>('')
         this.pageIndex = ref<number>(1)
-        this.studentQuierData = ref<StudentList[]>([])
-        this.tableData = ref<StudentList[][]>(
+        this.studentQuierData = ref([])
+        this.tableData = ref(
             []
         )
         this.multipleSelection = ref<StudentList[]>([])
@@ -88,7 +112,21 @@ class InitData {
         this.currentRow = ref<StudentList | undefined>()
         this.dialogFormVisible = ref(false)
         this.formLabelWidth = '140px'
-
+        this.formDataCount = ref(0)
+        this.formData =
+        {
+            id: '',
+            time: '',
+            name: '',
+            studentID: '',
+            sex: '',
+            phone: 0,
+            nationality: '',
+            boarding: '',
+            page: 1,
+            count: 0,
+            isShow: true
+        }
     }
 
     productQuire = () => {
@@ -152,20 +190,11 @@ class InitData {
             this.multipleTableRef.value!.clearSelection()
         }
     }
-    handleEdit = (index: number, row: StudentList) => {
-
-        // row.isShow = true
-        // this.[index].value = row.price
-        // this.name[index].value = row.name
-        // this.address[index].value = row.address
-        console.log(index, row)
-        // row._id == this.currentRow.value._id ? this.rowShow.value = true 
-        // : this.rowShow.value = false
-    }
+   
     handleDelete = (index: number, row: StudentList) => {
         console.log(index, row)
     }
-    clickClose=()=>{
+    clickClose = () => {
 
     }
 }
@@ -174,4 +203,8 @@ class InitData {
 
 export {
     InitData
+}
+
+export type {
+    StudentList
 }

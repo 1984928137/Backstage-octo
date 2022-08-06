@@ -106,7 +106,7 @@
         <el-table-column label="操作">
           <template #default="scope">
             <!-- handleEdit(scope.$index, scope.row) -->
-            <el-button size="small" @click="dialogFormVisible = true"
+            <el-button size="small" @click="handleEdit(scope.$index, scope.row)"
               >编辑</el-button
             >
 
@@ -137,153 +137,11 @@
   </div>
   <!-- 个人信息修改弹窗 -->
 
-  <el-dialog v-model="dialogFormVisible" title="个人信息" class="dialogBox">
-    <!-- <el-table  :show-header="false"	>
-      <el-table-column property="date" label="Date" width="150" >
-
-      </el-table-column>
-      <el-table-column property="name" label="Name" width="200" ></el-table-column>
-      <el-table-column property="address" label="Address" ></el-table-column>
-    </el-table> -->
-    <el-form :model="tableData">
-      <table>
-        <tr>
-          <td>
-            <el-form-item label="学号" :label-width="formLabelWidth">
-              <el-input
-                v-model="tableData[studentListData.page - 1][0].studentID"
-                autocomplete="off"
-              />
-            </el-form-item>
-          </td>
-          <td>
-            <el-form-item label="姓名" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-          <td>
-            <el-form-item label="性别" :label-width="formLabelWidth">
-              <el-radio-group v-model="tableData[studentListData.page - 1][0].sex">
-                <el-radio label="Sponsorship" />
-                <el-radio label="Venue" />
-              </el-radio-group>
-            </el-form-item>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <el-form-item label="联系电话" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-          <td>
-            <el-form-item label="民族" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-          <td>
-            <el-form-item label="身份证号" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <el-form-item label="出生日期" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-          <td>
-            <el-form-item label="是否住宿" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-          <td>
-            <el-form-item label="户口类型" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <el-form-item label="户口所在地" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <el-form-item label="家庭经济情况" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <el-form-item label="户籍所在地" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <el-form-item label="现住址" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <el-form-item label="是否留守儿童" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-          <td>
-            <el-form-item label="留守儿童情况" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <el-form-item
-              label="家庭主要成员情况"
-              :label-width="formLabelWidth"
-            >
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <el-form-item label="获奖情况" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <el-form-item label="特长" :label-width="formLabelWidth">
-              <el-input v-model="tableData[studentListData.page - 1][0].name" autocomplete="off" />
-            </el-form-item>
-          </td>
-        </tr>
-      </table>
-
-      <el-form-item>
-        <el-button type="primary" @click="">Submit</el-button>
-        <el-button @click="">Reset</el-button>
-      </el-form-item>
-    </el-form>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false"
-          >Confirm</el-button
-        >
-      </span>
-    </template>
-  </el-dialog>
+  <InformationPopup
+    :formDatas="formData"
+    ref="InformationPopup"
+    :dialogFormVisible="dialogFormVisible"
+  ></InformationPopup>
 </template>
 
 <script lang="ts">
@@ -298,6 +156,8 @@ import {
 import { exRequest, RouterAPI } from "../../axios/api";
 import { TimeInit } from "../../TS/commons/time";
 import { InitData } from "../../TS/studentList";
+import InformationPopup from "../common_cpn/InformationPopup.vue";
+import type { StudentList } from "../../TS/studentList";
 
 export default defineComponent({
   name: "studentList",
@@ -325,9 +185,16 @@ export default defineComponent({
       //   console.log(err);
       // });
     });
+    const InformationPopup = ref();
+    let handleEdit = (index: number, row: StudentList) => {
+      let Datas = Data.tableData[Data.studentListData.page - 1][index];
+      InformationPopup.value.changeBoon(Datas);
+    };
     return {
       ...toRefs(Data),
       Times,
+      InformationPopup,
+      handleEdit,
     };
   },
 });

@@ -53,6 +53,7 @@ declare module '@vue/runtime-core' {
     Header: typeof import('./src/components/common_cpn/header.vue')['default']
     HomeView: typeof import('./src/components/View/HomeView.vue')['default']
     'HomeView copy': typeof import('./src/components/View/HomeView copy.vue')['default']
+    InformationPopup: typeof import('./src/components/common_cpn/InformationPopup.vue')['default']
     ListView: typeof import('./src/components/View/ListView.vue')['default']
     LoginView: typeof import('./src/components/View/loginView.vue')['default']
     'LoginView copy': typeof import('./src/components/loginView copy.vue')['default']
