@@ -142,6 +142,9 @@
                 class="formitem"
               >
                 <el-input
+                  type="textarea"
+                  :autosize="{ minRows: 2, maxRows: 3 }"
+                  resize="none"
                   v-model="formData.accountLocation"
                   autocomplete="off"
                 />
@@ -190,6 +193,9 @@
                 prop="currentAddress"
               >
                 <el-input
+                  type="textarea"
+                  :autosize="{ minRows: 2, maxRows: 3 }"
+                  resize="none"
                   v-model="formData.currentAddress"
                   autocomplete="off"
                 />
@@ -231,7 +237,13 @@
           <div class="divTr">
             <div class="divTd">
               <el-form-item label="获奖情况" class="formitem" prop="awards">
-                <el-input v-model="formData.awards" autocomplete="off" />
+                <el-input
+                  type="textarea"
+                  :autosize="{ minRows: 2, maxRows: 3 }"
+                  resize="none"
+                  v-model="formData.awards"
+                  autocomplete="off"
+                />
               </el-form-item>
             </div>
           </div>
@@ -239,7 +251,13 @@
           <div class="divTr">
             <div class="divTd">
               <el-form-item label="特长" class="formitem" prop="specialty">
-                <el-input v-model="formData.specialty" autocomplete="off" />
+                <el-input
+                  v-model="formData.specialty"
+                  type="textarea"
+                  :autosize="{ minRows: 2, maxRows: 3 }"
+                  resize="none"
+                  autocomplete="off"
+                />
               </el-form-item>
             </div>
           </div>
