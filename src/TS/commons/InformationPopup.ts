@@ -1,23 +1,29 @@
 import { ReactiveEffect, ref, Ref, reactive, ReactiveEffectOptions } from "vue"
 import type { StudentList } from "../studentList";
 import type { FormInstance, FormRules } from 'element-plus'
+import { exRequest, RouterAPI } from "../../axios/api";
 
-interface Opt{
-    value:string
-    label:string
+interface Opt {
+    value: string
+    label: string
+}
+
+interface TypeAs<T> {
+
 }
 
 
 class InitPopup {
     dialogFormVisible: Ref<boolean>
     tableData: Ref<StudentList[][]>
+    data: unknown
     studentListData: Ref<StudentList>
     formLabelWidth: string
-    formData: StudentList
+    formData: any
     formSize: Ref<string>
     ruleFormRef: Ref<FormInstance | undefined>
     rules: FormRules
-    options:Opt[]
+    options: Opt[]
     constructor() {
         this.dialogFormVisible = ref(false)
         this.tableData = ref<StudentList[][]>(
@@ -159,20 +165,30 @@ class InitPopup {
                 value: '1',
                 label: '农村户口',
             },
-            
+
         ]
     }
-    changeBoon = (val: StudentList) => {
+    changeBoon = <T>(val: T) => {
         this.dialogFormVisible.value = true
         val = JSON.parse(JSON.stringify(val))
         this.formData = val
         console.log(this.formData)
     }
+
+    studentListChange = () => {
+        return exRequest.post({
+            url: RouterAPI.StudentListChange,
+            data: this.formData
+        })
+    }
+
     submitForm = async (formEl: FormInstance | undefined) => {
+
         if (!formEl) return
-        await formEl.validate((valid, fields) => {
+        await formEl.validate(async (valid, fields) => {
             if (valid) {
                 console.log('submit!')
+                this.data = await this.studentListChange()
                 console.log(this.formData)
             } else {
                 console.log('error submit!', fields)

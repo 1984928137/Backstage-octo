@@ -299,7 +299,9 @@ function Person(firstName: StudentList) {
 export default defineComponent({
   name: "",
   props: {
-    formDatas: {},
+    formDatas: {
+      type:undefined,
+    },
     dialogFormVisible: {
       type: Boolean,
     },
@@ -309,7 +311,6 @@ export default defineComponent({
     const { formDatas, dialogFormVisible } = toRefs(props);
     console.log("f", formDatas.value, dialogFormVisible.value);
     Data.dialogFormVisible = dialogFormVisible.value;
-    console.log("d", Data.dialogFormVisible);
     return {
       ...toRefs(Data),
       // dialogFormVisible
