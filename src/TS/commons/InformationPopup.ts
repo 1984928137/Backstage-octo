@@ -183,13 +183,14 @@ class InitPopup {
     }
 
     submitForm = async (formEl: FormInstance | undefined) => {
-
+        
         if (!formEl) return
         await formEl.validate(async (valid, fields) => {
             if (valid) {
                 console.log('submit!')
                 this.data = await this.studentListChange()
                 console.log(this.formData)
+                this.dialogFormVisible.value = false
             } else {
                 console.log('error submit!', fields)
             }
