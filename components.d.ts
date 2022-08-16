@@ -50,6 +50,7 @@ declare module '@vue/runtime-core' {
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
     ElTree: typeof import('element-plus/es')['ElTree']
+    FamilyChange: typeof import('./src/components/common_cpn/familyChange.vue')['default']
     Header: typeof import('./src/components/common_cpn/header.vue')['default']
     HomeView: typeof import('./src/components/View/HomeView.vue')['default']
     'HomeView copy': typeof import('./src/components/View/HomeView copy.vue')['default']
