@@ -8,9 +8,7 @@ interface Opt {
     label: string
 }
 
-interface TypeAs<T> {
 
-}
 
 
 class InitPopup {
@@ -19,7 +17,9 @@ class InitPopup {
     data: unknown
     studentListData: Ref<StudentList>
     formLabelWidth: string
+    FNumber: Ref<number>
     formData: any
+    FDom:HTMLElement
     formSize: Ref<string>
     ruleFormRef: Ref<FormInstance | undefined>
     rules: FormRules
@@ -40,7 +40,15 @@ class InitPopup {
             boarding: '',
             page: 1,
             count: 0,
-            isShow: true
+            isShow: true,
+            familyMember: {
+                familyAge: '',
+                familyName: '',
+                familyPhone: '',
+                familyProfession: '',
+                familyRelation: '',
+                familyWorkPlace: '',
+            }
         })
         this.formData = {
             id: '',
@@ -55,8 +63,10 @@ class InitPopup {
             count: 0,
             isShow: true
         }
+        this.FDom = document.getElementById('family') as HTMLElement
         this.formLabelWidth = '68px'
         this.formSize = ref('default')
+        this.FNumber = ref(1)
         this.ruleFormRef = ref<FormInstance>()
         this.rules = reactive<FormRules>({
             name: [
@@ -168,10 +178,31 @@ class InitPopup {
 
         ]
     }
+
+    familyMember = () => {
+        if (this.formData.familyMember !== undefined) {
+            this.formData.familyMember == '' ? this.formData.familyMember = [{
+                familyName: '',
+                familyAge: '',
+                familyPhone: '',
+                familyProfession: '',
+                familyRelation: '',
+                familyWorkPlace: '',
+            }]
+                : this.formData.familyMember
+        }
+
+
+    }
+
     changeBoon = <T>(val: T) => {
         this.dialogFormVisible.value = true
+
         val = JSON.parse(JSON.stringify(val))
+
         this.formData = val
+        this.familyMember()
+        console.log('formData', this.formData)
         console.log(this.formData)
     }
 
@@ -182,15 +213,34 @@ class InitPopup {
         })
     }
 
-    submitForm = async (formEl: FormInstance | undefined) => {
+
+
+    AddFamily = () => {
         
+        this.formData.familyMember.push({
+            familyName: '',
+            familyAge: '',
+            familyPhone: '',
+            familyProfession: '',
+            familyRelation: '',
+            familyWorkPlace: '',
+        })
+        this.FNumber.value++
+        this.FDom = document.getElementById('family') as HTMLElement
+        this.FDom.style.height = (80 + (this.FNumber.value - 1) * 40) + "px"
+        console.log(`this.FNumber.value`,this.FDom)
+    }
+
+    submitForm = async (formEl: FormInstance | undefined) => {
+
         if (!formEl) return
         await formEl.validate(async (valid, fields) => {
             if (valid) {
                 console.log('submit!')
-                this.data = await this.studentListChange()
+                // this.data = await this.studentListChange()
                 console.log(this.formData)
                 this.dialogFormVisible.value = false
+                this.FNumber.value = 1
             } else {
                 console.log('error submit!', fields)
             }

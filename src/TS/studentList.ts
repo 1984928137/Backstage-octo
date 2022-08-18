@@ -16,6 +16,15 @@ interface QuireData {
     boarding?: string,
 }
 
+interface FamilyMember{
+    familyName:string,
+    familyAge:string|number,
+    familyRelation:string,
+    familyWorkPlace:string,
+    familyProfession:string,
+    familyPhone:string|number,
+}
+
 interface StudentList {
     // 出生时间
     time: string,
@@ -49,7 +58,7 @@ interface StudentList {
     // 留守儿童
     behindChildren?:string
     // 家庭成员
-    familyMember?:unknown
+    familyMember: FamilyMember
     // 获奖情况
     awards?:string
     // 特长
@@ -98,7 +107,15 @@ class InitData {
             boarding: '',
             page: 1,
             count: 0,
-            isShow: true
+            isShow: true,
+            familyMember:{
+                familyAge:'',
+                familyName:'',
+                familyPhone:'',
+                familyProfession:'',
+                familyRelation:'',
+                familyWorkPlace:'',
+            }
         })
         this.anyField = ref<string | number>('')
         this.pageIndex = ref<number>(1)
@@ -125,7 +142,15 @@ class InitData {
             boarding: '',
             page: 1,
             count: 0,
-            isShow: true
+            isShow: true,
+            familyMember: {
+                familyAge: '',
+                familyName: '',
+                familyPhone: '',
+                familyProfession: '',
+                familyRelation: '',
+                familyWorkPlace: '',
+            }
         }
     }
 
@@ -206,5 +231,6 @@ export {
 }
 
 export type {
-    StudentList
+    StudentList,
+    FamilyMember
 }

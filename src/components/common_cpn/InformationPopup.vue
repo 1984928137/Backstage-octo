@@ -223,13 +223,78 @@
           </div>
           <!--  -->
           <div class="divTr">
-            <div class="divTd">
+            <div class="divTd family" id="family">
               <el-form-item
-                label="家庭主要成员情况"
                 class="formitem"
                 prop="familyMember"
+                label-width="90px"
               >
-                <el-input v-model="formData.familyMember" autocomplete="off" />
+                <template #label>
+                  <div id="FLabel" @click="AddFamily">
+                    <label for="">家庭主要成员情况</label>
+                  </div>
+                </template>
+                <!-- <family-change :familyMember="formData.familyMember"></family-change> -->
+                <div id="FDomBox" class="domBox">
+                  <div class="domBoxHade">
+                    <ul>
+                      <li>姓名</li>
+                      <li>年龄</li>
+                      <li>与学生关系</li>
+                      <li>职业</li>
+                      <li>工作单位</li>
+                      <li>联系电话</li>
+                      <li>操作</li>
+                    </ul>
+                  </div>
+                  <div
+                    class="domBoxChange"
+                    v-for="(item, index) of FNumber"
+                    :key="index"
+                  >
+                    <div class="inputWidth">
+                      <el-input
+                        v-model="formData.familyMember[item - 1].familyName"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="inputWidth">
+                      <el-input
+                        v-model="formData.familyMember[item - 1].familyAge"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="inputWidth">
+                      <el-input
+                        v-model="formData.familyMember[item - 1].familyRelation"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="inputWidth">
+                      <el-input
+                        v-model="
+                          formData.familyMember[item - 1].familyProfession
+                        "
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="inputWidth">
+                      <el-input
+                        v-model="
+                          formData.familyMember[item - 1].familyWorkPlace
+                        "
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="inputWidth">
+                      <el-input
+                        v-model="formData.familyMember[item - 1].familyPhone"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="inputWidth"></div>
+                  </div>
+                </div>
               </el-form-item>
             </div>
           </div>
@@ -283,12 +348,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, toRefs, Ref } from "vue";
+import {
+  defineComponent,
+  reactive,
+  ref,
+  toRefs,
+  Ref,
+  onBeforeMount,
+  onMounted,
+} from "vue";
 import { exRequest, RouterAPI } from "../../axios/api";
 import { TimeInit } from "../../TS/commons/time";
 // import {StudentList} from '../../TS/studentList';
 import type { StudentList } from "../../TS/studentList";
 import { InitPopup } from "../../TS/commons/InformationPopup";
+import familyChange from "./familyChange.vue";
 import { type } from "os";
 // const FormData: Ref<T> = ref<T>()
 
@@ -300,7 +374,7 @@ export default defineComponent({
   name: "",
   props: {
     formDatas: {
-      type:undefined,
+      type: undefined,
     },
     dialogFormVisible: {
       type: Boolean,
@@ -309,11 +383,24 @@ export default defineComponent({
   setup(props) {
     const Data = reactive(new InitPopup());
     const { formDatas, dialogFormVisible } = toRefs(props);
-    console.log("f", formDatas.value, dialogFormVisible.value);
-    Data.dialogFormVisible = dialogFormVisible.value;
+    // console.log("f", formDatas.value, dialogFormVisible.value);
+    // Data.dialogFormVisible = dialogFormVisible.value;
+    onMounted(() => {
+      console.log("sss", Data.formData);
+    });
+
+    Data.formData.familyMember = {
+      familyAge: "",
+      familyName: "",
+      familyPhone: "",
+      familyProfession: "",
+      familyRelation: "",
+      familyWorkPlace: "",
+    };
     return {
       ...toRefs(Data),
       // dialogFormVisible
+      familyChange,
     };
   },
 });
@@ -363,6 +450,42 @@ export default defineComponent({
 .txtHg {
   height: 75px;
 }
+
+.family {
+  height: 80px;
+}
+.divTd.family {
+  .el-form-item.formitem {
+    ::v-deep .el-form-item__label {
+      height: 60px;
+    }
+  }
+}
+.inputWidth {
+  width: 72px;
+  margin: 4px;
+}
+.domBox {
+  display: flex;
+  flex-direction: column;
+
+  .domBoxHade {
+    display: flex;
+    ul {
+      display: flex;
+      width: 100%;
+      li {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+  .domBoxChange {
+    display: flex;
+  }
+}
+
 .el-form-item {
   margin-bottom: 0;
 }
