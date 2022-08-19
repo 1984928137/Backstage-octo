@@ -2,7 +2,11 @@
   <div>
     <!-- 个人信息修改弹窗 -->
 
-    <el-dialog v-model="dialogFormVisible" title="个人信息">
+    <el-dialog
+      v-model="dialogFormVisible"
+      title="个人信息"
+      @close="closeDialog"
+    >
       <!-- <el-table  :show-header="false"	>
       <el-table-column property="date" label="Date" width="150" >
 
@@ -292,7 +296,11 @@
                         autocomplete="off"
                       />
                     </div>
-                    <div class="inputWidth"></div>
+                    <div class="inputWidth BtnCenter">
+                      <el-button type="danger" size="small"> 
+                        删除
+                      </el-button>
+                    </div>
                   </div>
                 </div>
               </el-form-item>
@@ -338,9 +346,6 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogFormVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false"
-            >Confirm</el-button
-          >
         </span>
       </template>
     </el-dialog>
@@ -464,6 +469,11 @@ export default defineComponent({
 .inputWidth {
   width: 72px;
   margin: 4px;
+}
+.inputWidth.BtnCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .domBox {
   display: flex;

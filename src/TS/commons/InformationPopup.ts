@@ -19,7 +19,7 @@ class InitPopup {
     formLabelWidth: string
     FNumber: Ref<number>
     formData: any
-    FDom:HTMLElement
+    FDom: HTMLElement
     formSize: Ref<string>
     ruleFormRef: Ref<FormInstance | undefined>
     rules: FormRules
@@ -179,9 +179,9 @@ class InitPopup {
         ]
     }
 
-    familyMember = () => {
-        if (this.formData.familyMember !== undefined) {
-            this.formData.familyMember == '' ? this.formData.familyMember = [{
+    familyMember = (val: any) => {
+        if (val.familyMember !== undefined) {
+            val.familyMember == '' ? val.familyMember = [{
                 familyName: '',
                 familyAge: '',
                 familyPhone: '',
@@ -189,21 +189,26 @@ class InitPopup {
                 familyRelation: '',
                 familyWorkPlace: '',
             }]
-                : this.formData.familyMember
+                : val.familyMember
         }
 
 
     }
 
+    closeDialog = () => {
+        console.log('closeDialog')
+        this.FNumber.value = 1
+        this.FDom = document.getElementById('family') as HTMLElement
+        this.FDom.style.height = '80px'
+    }
+
     changeBoon = <T>(val: T) => {
         this.dialogFormVisible.value = true
 
-        val = JSON.parse(JSON.stringify(val))
-
-        this.formData = val
-        this.familyMember()
+        // val = JSON.parse(JSON.stringify(val))
+        this.formData = JSON.parse(JSON.stringify(val))
+        this.familyMember(this.formData)
         console.log('formData', this.formData)
-        console.log(this.formData)
     }
 
     studentListChange = () => {
@@ -216,7 +221,7 @@ class InitPopup {
 
 
     AddFamily = () => {
-        
+
         this.formData.familyMember.push({
             familyName: '',
             familyAge: '',
@@ -228,7 +233,6 @@ class InitPopup {
         this.FNumber.value++
         this.FDom = document.getElementById('family') as HTMLElement
         this.FDom.style.height = (80 + (this.FNumber.value - 1) * 40) + "px"
-        console.log(`this.FNumber.value`,this.FDom)
     }
 
     submitForm = async (formEl: FormInstance | undefined) => {
@@ -238,8 +242,8 @@ class InitPopup {
             if (valid) {
                 console.log('submit!')
                 // this.data = await this.studentListChange()
-                console.log(this.formData)
                 this.dialogFormVisible.value = false
+                console.log(this.formData)
                 this.FNumber.value = 1
             } else {
                 console.log('error submit!', fields)
@@ -248,6 +252,10 @@ class InitPopup {
     }
     resetForm = (formEl: FormInstance | undefined) => {
         if (!formEl) return
+        // console.log('reset')
+        // this.familyMember(this.resetData)
+        // this.formData = this.resetData
+        // console.log('reset2', this.resetData, this.formData)
         formEl.resetFields()
     }
 }
