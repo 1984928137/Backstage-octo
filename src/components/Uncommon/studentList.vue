@@ -3,23 +3,51 @@
     <!-- 顶部查询框 -->
     <div>
       <el-form :inline="true" :model="quireData" class="demo-form-inline">
-        <el-form-item label="学号">
-          <el-input v-model="quireData.studentID" placeholder="搜索" />
-        </el-form-item>
-        <el-form-item label="名字">
-          <el-input v-model="quireData.name" placeholder="搜索">
-            <!-- <el-option label="Zone one" value="shanghai" /> -->
-            <!-- <el-option label="Zone two" value="beijing" /> -->
-          </el-input>
-        </el-form-item>
-        <el-form-item label="任意条件查询">
-          <el-input v-model="anyField" placeholder="搜索" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onQuireClick">查询</el-button>
-          <el-button type="primary" @click="toggleSelection()"
-            >Clear selection</el-button
+        <el-form-item label="按时间" class="dateItem">
+          <el-date-picker
+            v-model="timeValue1"
+            type="daterange"
+            :start-placeholder="Times.reTime(defaultTime[0])"
+            :end-placeholder="Times.reTime(defaultTime[1])"
+            :default-time="defaultTime"
+            format="YYYY/MM/DD"
+            value-format="YYYY-MM-DD"
+            @change="OnTimeClick(timeValue1)"
           >
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="按条件查询" class="dateItem">
+          <el-select
+            class="FieldSelect"
+            v-model="FieldValue"
+            placeholder="Select"
+            size="large"
+            clearable
+          >
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+          <el-input v-model="anyField" placeholder="搜索" class="anyField" />
+        </el-form-item>
+
+        <el-form-item class="dateItem btn-w">
+          <div class="btn-df">
+            <el-button type="primary" @click="onQuireClick">查询</el-button>
+            <el-button type="primary" @click="onRestoreClick"
+              >取消查询</el-button
+            >
+            <el-button type="primary" @click="toggleSelection()"
+              >清除全选</el-button
+            >
+          </div>
+        </el-form-item>
+        <el-form-item class="dateItem">
+          <el-button type="primary" @click="AddNews">添加学生信息</el-button>
+          <el-button type="primary" @click="AddNews">导出</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -188,13 +216,18 @@ export default defineComponent({
     const InformationPopup = ref();
     let handleEdit = (index: number, row: StudentList) => {
       let Datas = Data.tableData[Data.studentListData.page - 1][index];
-      InformationPopup.value.changeBoon(Datas);
+      InformationPopup.value.changeBoon(Datas, false);
+    };
+    let AddNews = () => {
+      // let Datas = Data.tableData[Data.studentListData.page - 1][index];
+      InformationPopup.value.changeBoon(Data.formData, true);
     };
     return {
       ...toRefs(Data),
       Times,
       InformationPopup,
       handleEdit,
+      AddNews,
     };
   },
 });
@@ -212,5 +245,26 @@ export default defineComponent({
 }
 .dialogBox {
   background-color: rgb(215, 211, 211);
+}
+.dateItem {
+  margin-right: 18px;
+}
+.dateItem.btn-w {
+  width: 200px;
+}
+.btn-df{
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.el-button{
+margin-bottom: 7px;
+}
+.anyField {
+  width: 270px;
+  height: 40px;
+}
+.FieldSelect {
+  width: 130px;
 }
 </style>

@@ -24,6 +24,7 @@ class InitPopup {
     ruleFormRef: Ref<FormInstance | undefined>
     rules: FormRules
     options: Opt[]
+    isCreate: Ref<boolean>
     constructor() {
         this.dialogFormVisible = ref(false)
         this.tableData = ref<StudentList[][]>(
@@ -41,14 +42,14 @@ class InitPopup {
             page: 1,
             count: 0,
             isShow: true,
-            familyMember: {
+            familyMember: [{
                 familyAge: '',
                 familyName: '',
                 familyPhone: '',
                 familyProfession: '',
                 familyRelation: '',
                 familyWorkPlace: '',
-            }
+            }]
         })
         this.formData = {
             id: '',
@@ -177,6 +178,7 @@ class InitPopup {
             },
 
         ]
+        this.isCreate = ref(false)
     }
 
     familyMember = (val: any) => {
@@ -195,6 +197,22 @@ class InitPopup {
 
     }
 
+    subCreateStuNew = async (formEl: FormInstance | undefined) => {
+
+        if (!formEl) return
+        await formEl.validate(async (valid, fields) => {
+            if (valid) {
+                console.log('添加学生信息!',this.isCreate.value)
+                // this.data = await this.studentListChange()
+                this.dialogFormVisible.value = false
+                console.log(this.formData)
+                this.FNumber.value = 1
+            } else {
+                console.log('error submit!', fields)
+            }
+        })
+    }
+
     closeDialog = () => {
         console.log('closeDialog')
         this.FNumber.value = 1
@@ -202,9 +220,9 @@ class InitPopup {
         this.FDom.style.height = '80px'
     }
 
-    changeBoon = <T>(val: T) => {
+    changeBoon = <T>(val: T, bool: boolean) => {
+        bool == false ? this.isCreate.value = false : this.isCreate.value = true
         this.dialogFormVisible.value = true
-
         // val = JSON.parse(JSON.stringify(val))
         this.formData = JSON.parse(JSON.stringify(val))
         this.familyMember(this.formData)
@@ -240,7 +258,7 @@ class InitPopup {
         if (!formEl) return
         await formEl.validate(async (valid, fields) => {
             if (valid) {
-                console.log('submit!')
+                console.log('submit!',this.isCreate.value)
                 // this.data = await this.studentListChange()
                 this.dialogFormVisible.value = false
                 console.log(this.formData)

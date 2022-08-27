@@ -297,9 +297,7 @@
                       />
                     </div>
                     <div class="inputWidth BtnCenter">
-                      <el-button type="danger" size="small"> 
-                        删除
-                      </el-button>
+                      <el-button type="danger" size="small"> 删除 </el-button>
                     </div>
                   </div>
                 </div>
@@ -337,15 +335,24 @@
         </div>
 
         <el-form-item>
-          <el-button type="primary" @click="submitForm(ruleFormRef)"
-            >Submit</el-button
+          <el-button
+            type="primary"
+            v-show="!isCreate"
+            @click="submitForm(ruleFormRef)"
+            >提交</el-button
           >
-          <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
+          <el-button
+            type="primary"
+            v-show="isCreate"
+            @click="subCreateStuNew(ruleFormRef)"
+            >提交</el-button
+          >
+          <el-button @click="resetForm(ruleFormRef)">重置</el-button>
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">Cancel</el-button>
+          <el-button @click="dialogFormVisible = false">取消</el-button>
         </span>
       </template>
     </el-dialog>
@@ -470,7 +477,7 @@ export default defineComponent({
   width: 72px;
   margin: 4px;
 }
-.inputWidth.BtnCenter{
+.inputWidth.BtnCenter {
   display: flex;
   justify-content: center;
   align-items: center;

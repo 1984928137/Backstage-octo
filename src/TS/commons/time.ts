@@ -44,8 +44,9 @@ class TimeInit {
     rePairo = (m: string | number) => {
         return m < 10 ? '0' + m : m
     }
-    reTime = (date: string | number) => {
-        let times = new Date(date).getTime()
+    reTime = (date: string | number | Date) => {
+        let times = date instanceof Date ? date.getTime()
+        : new Date(date).getTime()
         let time = new Date(times);
         let y = time.getFullYear();
         let m = time.getMonth() + 1;

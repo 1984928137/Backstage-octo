@@ -7,6 +7,8 @@
 import "element-plus/dist/index.css";
 import { ref } from "vue";
 import { ElConfigProvider } from "element-plus";
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+let zhCns = zhCn
 
 // import Com_button from './components/common_cpn/com_button.vue'
 
@@ -21,7 +23,10 @@ const zIndex = ref(3000);
   <!-- <el-config-provider :size="'large'" :z-index="zIndex"> -->
   <!-- <Com_button :icon="icon"></Com_button> -->
   <!-- <snake /> -->
-  <router-view></router-view>
+  
+  <el-config-provider :locale="zhCns">
+    <router-view></router-view>
+  </el-config-provider>
   <!-- </el-config-provider> -->
 </template>
 
