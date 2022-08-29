@@ -259,7 +259,7 @@ class InitPopup {
         await formEl.validate(async (valid, fields) => {
             if (valid) {
                 console.log('submit!',this.isCreate.value)
-                // this.data = await this.studentListChange()
+                this.data = await this.studentListChange()
                 this.dialogFormVisible.value = false
                 console.log(this.formData)
                 this.FNumber.value = 1

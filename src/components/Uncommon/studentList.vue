@@ -47,7 +47,7 @@
         </el-form-item>
         <el-form-item class="dateItem">
           <el-button type="primary" @click="AddNews">添加学生信息</el-button>
-          <el-button type="primary" @click="AddNews">导出</el-button>
+          <el-button type="primary" @click="tableToExcel">导出</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -192,17 +192,11 @@ export default defineComponent({
 
   setup() {
     const Data = reactive(new InitData());
-    function getStudentListData() {
-      return exRequest.get({
-        url: RouterAPI.StudentList,
-        data: "",
-      });
-    }
     const Times = new TimeInit();
     onBeforeMount(async () => {
       console.log("onBeforeMount");
       const routerData: Ref = ref();
-      routerData.value = await getStudentListData();
+      routerData.value = await Data.getStudentListData();
       Data.studentQuierData = routerData.value?.result;
       // .then((res) => {
       Data.studentListData.count = routerData.value?.result.length;

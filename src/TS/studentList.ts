@@ -197,6 +197,13 @@ class InitData {
         ])
     }
 
+    getStudentListData = ()=> {
+        return exRequest.get({
+            url: RouterAPI.StudentList,
+            data: "",
+        });
+    }
+
     productQuire = () => {
         // this.productQuireData
         return exRequest.post({
@@ -322,6 +329,43 @@ class InitData {
     }
     OnTimeClick = (val: any) => {
         console.log(val)
+    }
+
+    tableToExcel = async() => {
+        // 要导出的json数据
+       
+        const jsonData: Ref = ref();
+        this.tableData.value = []
+        jsonData.value = await this.getStudentListData();
+        this.studentQuierData = jsonData.value?.result;
+        // .then((res) => {
+        this.studentListData.count = jsonData.value?.result.length;
+        this.splitArray(jsonData.value?.result);
+        // 列标题，逗号隔开，每一个逗号就是隔开一个单元格
+        let str = `学号,姓名,电话,邮箱\n`;
+        // 增加\t为了不让表格显示科学计数法或者其他格式
+        for (let i = 0; i < jsonData.value?.result.length; i++) {
+            for (let key in jsonData.value?.result[i]) {
+                if (key == "_id" || key == "permission" || key == "postData") {
+                    continue
+                }
+                if (key == 'familyMember') {
+                    console.log(jsonData.value.result[i][key][0],
+                        Object.prototype.toString.call(jsonData.value.result[i][key]) == "[object Array]")
+                }
+                str += `${jsonData.value.result[i][key] + '\t'},`;
+            }
+            str += '\n';
+        }
+        console.log("str",str)
+        // encodeURIComponent解决中文乱码
+        const uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
+        // 通过创建a标签实现
+        const link = document.createElement("a");
+        link.href = uri;
+        // 对下载的文件命名
+        link.download = "学生信息表.csv";
+        link.click();
     }
 }
 
