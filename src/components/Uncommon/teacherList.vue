@@ -190,29 +190,28 @@ export default defineComponent({
   name: "",
   setup() {
     const Data = reactive(new InitData());
-    function productData() {
-      return exRequest.get({
-        url: RouterAPI.Product,
-        data: "",
-      });
-    }
     const Times = new TimeInit();
     onBeforeMount(async () => {
       console.log("onBeforeMount");
       const routerData: Ref = ref();
-      routerData.value = await productData();
+      routerData.value = await Data.getTeacherListData();
+      Data.teacherQuierData = routerData.value?.result;
       // .then((res) => {
       Data.teacherListData.count = routerData.value?.result.length;
       Data.splitArray(routerData.value?.result);
     });
     const InformationPopup = ref();
+    // 查看、修改信息
     let handleEdit = (index: number, row: TeacherList) => {
+      console.log(Data.teacherListData.page)
       let Datas = Data.tableData[Data.teacherListData.page - 1][index];
-      InformationPopup.value.changeBoon(Datas, false);
+      // 调用弹窗
+      InformationPopup.value.changeBoon(Datas, false, "teacherList");
     };
+    // 添加新的信息
     let AddNews = () => {
-      // let Datas = Data.tableData[Data.teacherListData.page - 1][index];
-      InformationPopup.value.changeBoon(Data.formData, true);
+      // 调用弹窗
+      InformationPopup.value.changeBoon(Data.formData, true, "teacherList");
     };
     return {
       ...toRefs(Data),

@@ -25,6 +25,7 @@ class InitPopup {
     rules: FormRules
     options: Opt[]
     isCreate: Ref<boolean>
+    isShow: Ref<string>
     constructor() {
         this.dialogFormVisible = ref(false)
         this.tableData = ref<StudentList[][]>(
@@ -179,6 +180,15 @@ class InitPopup {
 
         ]
         this.isCreate = ref(false)
+        this.isShow = ref('')
+    }
+    
+    // 向后端发送 修改信息 的post请求
+    subListChange = (val:string) => {
+        return exRequest.post({
+            url: val,
+            data: this.formData
+        })
     }
 
     familyMember = (val: any) => {
@@ -197,13 +207,18 @@ class InitPopup {
 
     }
 
+    // 提交创建的新信息
     subCreateStuNew = async (formEl: FormInstance | undefined) => {
 
         if (!formEl) return
         await formEl.validate(async (valid, fields) => {
             if (valid) {
-                console.log('添加学生信息!',this.isCreate.value)
-                // this.data = await this.studentListChange()
+
+                console.log('添加信息!', this.isShow.value)
+                if (this.isShow.value == "teacherList") {
+                    this.data = await this.subListChange(RouterAPI.TeacherListChange)
+                }
+                
                 this.dialogFormVisible.value = false
                 console.log(this.formData)
                 this.FNumber.value = 1
@@ -215,26 +230,26 @@ class InitPopup {
 
     closeDialog = () => {
         console.log('closeDialog')
-        this.FNumber.value = 1
-        this.FDom = document.getElementById('family') as HTMLElement
-        this.FDom.style.height = '80px'
+        if (this.isShow.value == "studentList") {
+            this.FNumber.value = 1
+            this.FDom = document.getElementById('family') as HTMLElement
+            this.FDom.style.height = '80px'
+        }
     }
 
-    changeBoon = <T>(val: T, bool: boolean) => {
+    changeBoon = <T>(val: T, bool: boolean, transfer: string) => {
+        // 判断是否创建新的信息
         bool == false ? this.isCreate.value = false : this.isCreate.value = true
+        console.log(val)
+        this.formData = JSON.parse(JSON.stringify(val))
+        this.isShow.value = transfer
         this.dialogFormVisible.value = true
         // val = JSON.parse(JSON.stringify(val))
-        this.formData = JSON.parse(JSON.stringify(val))
-        this.familyMember(this.formData)
+        this.isShow.value == 'studentList' ? this.familyMember(this.formData) : null
         console.log('formData', this.formData)
     }
 
-    studentListChange = () => {
-        return exRequest.post({
-            url: RouterAPI.StudentListChange,
-            data: this.formData
-        })
-    }
+    
 
 
 
@@ -253,13 +268,16 @@ class InitPopup {
         this.FDom.style.height = (80 + (this.FNumber.value - 1) * 40) + "px"
     }
 
+    // 提交修改后的新信息
     submitForm = async (formEl: FormInstance | undefined) => {
 
         if (!formEl) return
         await formEl.validate(async (valid, fields) => {
             if (valid) {
-                console.log('submit!',this.isCreate.value)
-                this.data = await this.studentListChange()
+                console.log('submit!', this.isCreate.value)
+                if (this.isShow.value == "teacherList") {
+                    this.data = await this.subListChange(RouterAPI.TeacherListChange)
+                }
                 this.dialogFormVisible.value = false
                 console.log(this.formData)
                 this.FNumber.value = 1

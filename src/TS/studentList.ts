@@ -197,7 +197,7 @@ class InitData {
         ])
     }
 
-    getStudentListData = ()=> {
+    getStudentListData = () => {
         return exRequest.get({
             url: RouterAPI.StudentList,
             data: "",
@@ -286,11 +286,13 @@ class InitData {
         this.splitArray(quireDatas)
         this.studentListData.value.count = quireDatas.length
     }
+    // 取消查询
     onRestoreClick = () => {
         this.tableData.value = []
         let RestoreData: StudentList[] = JSON.parse(JSON.stringify(this.studentQuierData.value))
         this.splitArray(RestoreData)
         this.studentListData.value.count = RestoreData.length
+        this.anyField.value = ''
     }
     handleCurrentChange = (val: number) => {
         this.pageIndex.value = val
@@ -330,10 +332,10 @@ class InitData {
     OnTimeClick = (val: any) => {
         console.log(val)
     }
-
-    tableToExcel = async() => {
+    // 导出老师信息
+    tableToExcel = async () => {
         // 要导出的json数据
-       
+
         const jsonData: Ref = ref();
         this.tableData.value = []
         jsonData.value = await this.getStudentListData();
@@ -357,7 +359,7 @@ class InitData {
             }
             str += '\n';
         }
-        console.log("str",str)
+        console.log("str", str)
         // encodeURIComponent解决中文乱码
         const uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
         // 通过创建a标签实现

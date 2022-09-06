@@ -210,11 +210,11 @@ export default defineComponent({
     const InformationPopup = ref();
     let handleEdit = (index: number, row: StudentList) => {
       let Datas = Data.tableData[Data.studentListData.page - 1][index];
-      InformationPopup.value.changeBoon(Datas, false);
+      InformationPopup.value.changeBoon(Datas, false, "studentList");
     };
     let AddNews = () => {
       // let Datas = Data.tableData[Data.studentListData.page - 1][index];
-      InformationPopup.value.changeBoon(Data.formData, true);
+      InformationPopup.value.changeBoon(Data.formData, true, "studentList");
     };
     return {
       ...toRefs(Data),
@@ -246,13 +246,13 @@ export default defineComponent({
 .dateItem.btn-w {
   width: 200px;
 }
-.btn-df{
+.btn-df {
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
 }
-.el-button{
-margin-bottom: 7px;
+.el-button {
+  margin-bottom: 7px;
 }
 .anyField {
   width: 270px;

@@ -3,31 +3,38 @@ import type { ElTable } from "element-plus";
 import { RouterAPI, exRequest } from "../axios/api";
 
 interface QuireData {
+    // 出生时间
     time?: string | number,
-    name?: string,
-    id: number | string
-    // 学号
-    studentID?: number | string,
+    name: string,
+    id?: number | string,
+    // 教师编号
+    TeacherID?: number | string,
     sex?: number | string,
-    phone?: number,
-    // 民族
-    nationality?: string,
-    // 寄宿
-    boarding?: string,
+    phone?: number | string,
+    // 身份证号
+    IDcard?: string | number
+    // 地址
+    place?: string,
+    // qq号
+    QQ?: string | number,
+    // 微信号
+    WX?: string | number
 }
 
 enum FamilyS {
     name = 0,
-    studentID = 1,
+    // 教师编号
+    TeacherID = 1,
     sex = 2,
     phone = 3,
-    nationality = 4,
-    boarding = 5,
-    IDcard = 6,
-    accountType = 7,
-    censusRegister = 8,
-    currentAddress = 9,
-    whetherChildren = 10,
+    // 身份证号
+    IDcard = 4,
+    // 地址
+    place = 5,
+    // qq号
+    QQ = 6,
+    // 微信号
+    WX = 7
 }
 
 interface TchOptions {
@@ -43,15 +50,15 @@ interface TeacherList {
     // 教师编号
     TeacherID: number | string,
     sex: number | string,
-    phone: number|string,
+    phone: number | string,
     // 身份证号
-    IDcard:string|number
+    IDcard: string | number
     // 地址
     place: string,
     // qq号
-    QQ: string|number,
+    QQ: string | number,
     // 微信号
-    WX:string|number
+    WX: string | number
     page: number,
     count: number,
     isShow: boolean
@@ -92,11 +99,13 @@ class InitData {
                 id: '',
                 time: '',
                 name: '',
-                studentID: '',
+                TeacherID: '',
+                IDcard: '',
                 sex: '',
                 phone: 0,
-                nationality: '',
-                boarding: ''
+                place: '',
+                QQ: '',
+                WX: '',
             }
         )
         this.formData =
@@ -105,12 +114,12 @@ class InitData {
             time: '',
             name: '',
             TeacherID: '',
-            IDcard:'',
+            IDcard: '',
             sex: '',
             phone: 0,
             place: '',
             QQ: '',
-            WX:'',
+            WX: '',
             page: 1,
             count: 0,
             isShow: true,
@@ -148,16 +157,13 @@ class InitData {
         this.FieldValue = ref('')
         this.options = [
             { label: '名字', value: '0' },
-            { label: '学号', value: '1' },
+            { label: '编号', value: '1' },
             { label: '性别', value: '2' },
             { label: '手机号码', value: '3' },
-            { label: '民族', value: '4' },
-            { label: '是否住宿', value: '5' },
-            { label: '身份证', value: '6' },
-            { label: '户口类型', value: '7' },
-            { label: '户籍', value: '8' },
-            { label: '居住城市', value: '9' },
-            { label: '是否留守', value: '10' }
+            { label: '身份证', value: '4' },
+            { label: '地址', value: '5' },
+            { label: 'QQ', value: '6' },
+            { label: '微信', value: '7' },
         ]
         this.dialogFormVisible = ref(false)
 
@@ -166,7 +172,7 @@ class InitData {
     // 发送请求
     getTeacherListData = () => {
         return exRequest.get({
-            url: RouterAPI.StudentList,
+            url: RouterAPI.TeacherList,
             data: "",
         });
     }
@@ -294,9 +300,11 @@ class InitData {
     // 取消查询
     onRestoreClick = () => {
         this.tableData.value = []
+        console.log(this.teacherQuierData.value)
         let RestoreData: TeacherList[] = JSON.parse(JSON.stringify(this.teacherQuierData.value))
         this.splitArray(RestoreData)
         this.teacherListData.value.count = RestoreData.length
+        this.anyField.value = ''
     }
 
     // 导出老师信息

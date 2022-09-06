@@ -7,14 +7,12 @@
       title="个人信息"
       @close="closeDialog"
     >
-      <!-- <el-table  :show-header="false"	>
-      <el-table-column property="date" label="Date" width="150" >
-
-      </el-table-column>
-      <el-table-column property="name" label="Name" width="200" ></el-table-column>
-      <el-table-column property="address" label="Address" ></el-table-column>
-    </el-table> -->
-      <el-form :model="formData" ref="ruleFormRef">
+      <!-- studentList组件 -->
+      <el-form
+        v-if="isShow == 'studentList'"
+        :model="formData"
+        ref="ruleFormRef"
+      >
         <div>
           <!--  -->
           <div class="divTr">
@@ -350,6 +348,143 @@
           <el-button @click="resetForm(ruleFormRef)">重置</el-button>
         </el-form-item>
       </el-form>
+
+      <!-- teacherList组件 -->
+      <el-form
+        v-if="isShow == 'teacherList'"
+        :model="formData"
+        ref="ruleFormRef"
+      >
+        <div class="teacherBox">
+          <!--  -->
+          <div class="divTd teacher">
+            <el-form-item
+              label="教师编号"
+              :label-width="formLabelWidth"
+              class="divWth1"
+              prop="TeacherID"
+            >
+              <el-input v-model="formData.TeacherID" autocomplete="off" />
+            </el-form-item>
+          </div>
+          <div class="divTd teacher">
+            <el-form-item
+              label="姓名"
+              :label-width="formLabelWidth"
+              class="divWth2"
+              prop="name"
+            >
+              <el-input v-model="formData.name" class="ssff" autocomplete="off" />
+            </el-form-item>
+          </div>
+          <div class="divTd teacher">
+            <el-form-item
+              label="性别"
+              :label-width="formLabelWidth"
+              class="divWth3"
+              prop="sex"
+            >
+              <el-radio-group v-model="formData.sex">
+                <el-radio label="1">男</el-radio>
+                <el-radio label="0">女</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </div>
+          <!--  -->
+          <div class="divTd teacher">
+            <el-form-item
+              label="联系电话"
+              :label-width="formLabelWidth"
+              class="divWth1"
+              prop="phone"
+            >
+              <el-input
+                v-model="formData.phone"
+                class="inputWth"
+                autocomplete="off"
+              />
+            </el-form-item>
+          </div>
+          <div class="divTd teacher">
+            <el-form-item
+              label="身份证号"
+              :label-width="formLabelWidth"
+              class="divWth2"
+              prop="IDcard"
+            >
+              <el-input v-model="formData.IDcard" autocomplete="off" />
+            </el-form-item>
+          </div>
+          <div class="divTd teacher">
+            <el-form-item
+              label="地址"
+              :label-width="formLabelWidth"
+              class="divWth3"
+              prop="place"
+            >
+              <el-input
+                type="textarea"
+                :autosize="{ minRows: 2, maxRows: 3 }"
+                resize="none"
+                v-model="formData.place"
+                autocomplete="off"
+              />
+            </el-form-item>
+          </div>
+          <!--  -->
+          <div class="divTd teacher">
+            <el-form-item
+              label="出生日期"
+              :label-width="formLabelWidth"
+              class="divWth1"
+              prop="time"
+            >
+              <!-- <el-input v-model="formData.time" type="date" autocomplete="off" /> -->
+              <el-date-picker
+                v-model="formData.time"
+                type="date"
+                placeholder="Pick a day"
+              />
+            </el-form-item>
+          </div>
+          <div class="divTd teacher">
+            <el-form-item
+              label="QQ"
+              :label-width="formLabelWidth"
+              class="divWth2"
+              prop="QQ"
+            >
+              <el-input v-model="formData.QQ" autocomplete="off" />
+            </el-form-item>
+          </div>
+          <div class="divTd teacher">
+            <el-form-item
+              label="微信"
+              :label-width="formLabelWidth"
+              class="divWth3"
+              prop="WX"
+            >
+              <el-input v-model="formData.WX" autocomplete="off" />
+            </el-form-item>
+          </div>
+        </div>
+
+        <el-form-item class="bottomBtn">
+          <el-button
+            type="primary"
+            v-show="!isCreate"
+            @click="submitForm(ruleFormRef)"
+            >提交</el-button
+          >
+          <el-button
+            type="primary"
+            v-show="isCreate"
+            @click="subCreateStuNew(ruleFormRef)"
+            >提交</el-button
+          >
+          <el-button @click="resetForm(ruleFormRef)">重置</el-button>
+        </el-form-item>
+      </el-form>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取消</el-button>
@@ -501,6 +636,36 @@ export default defineComponent({
   .domBoxChange {
     display: flex;
   }
+}
+
+.teacherBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #c5c5c540;
+  border-radius: 12px 12px 0px 0px;
+  .divTd.teacher {
+    width: 70%;
+    border: none;
+    .divWth1 {
+      width: 100%;
+    }
+    .divWth2 {
+      width: 100%;
+    }
+    .divWth3 {
+      width: 100%;
+    }
+    ::v-deep .el-form-item__label {
+      color: black;
+    }
+  }
+}
+.bottomBtn {
+  background-color: #c5c5c540;
+  padding-top: 15px;
+  padding-bottom: 20px;
+  border-radius: 0px 0px 12px 12px;
 }
 
 .el-form-item {
