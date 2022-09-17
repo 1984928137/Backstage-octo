@@ -106,7 +106,9 @@
         </el-table-column>
         <el-table-column sortable prop="sex" label="性别" width="150">
           <template #default="scope">
-            <span>{{ scope.row.sex }}</span>
+            <span>{{
+              scope.row.sex == 0 ? "女" : scope.row.sex == 1 ? "男" : "中性"
+            }}</span>
           </template>
         </el-table-column>
         <el-table-column sortable prop="boarding" label="是否寄宿" width="150">

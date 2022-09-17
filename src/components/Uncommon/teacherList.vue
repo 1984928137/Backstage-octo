@@ -66,17 +66,14 @@
         }"
       >
         <el-table-column type="selection" width="55" />
-        <el-table-column sortable prop="studentID" label="学号" width="150">
+        
+        <!-- <el-table-column sortable prop="TeacherID" label="学号" width="150">
           <template #default="scope">
-            <!-- <span v-show="!scope.row.isShow">{{ scope.row.price }}</span> -->
-            <span>{{ scope.row.studentID }}</span>
-            <!-- <el-input
-              v-show="scope.row.isShow"
-              v-model="teacherListData.id"
-              placeholder="Please input"
-            /> -->
+           
+            <span>{{ scope.row.TeacherID }}</span>
           </template>
-        </el-table-column>
+        </el-table-column> -->
+
         <el-table-column sortable prop="name" label="名字" width="150">
           <template #default="scope">
             <!-- <span v-show="!scope.row.isShow">{{ scope.row.name }}</span> -->
@@ -88,16 +85,7 @@
             /> -->
           </template>
         </el-table-column>
-        <el-table-column sortable prop="time" label="出生年月" width="150">
-          <template #default="scope">
-            <span>{{ scope.row.time }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column sortable prop="nationality" label="民族" width="150">
-          <template #default="scope">
-            <span>{{ scope.row.nationality }}</span>
-          </template>
-        </el-table-column>
+
         <el-table-column sortable prop="phone" label="手机号码" width="150">
           <template #default="scope">
             <span>{{ scope.row.phone }}</span>
@@ -105,14 +93,12 @@
         </el-table-column>
         <el-table-column sortable prop="sex" label="性别" width="150">
           <template #default="scope">
-            <span>{{ scope.row.sex }}</span>
+            <span>{{
+              scope.row.sex == 0 ? "女" : scope.row.sex == 1 ? "男" : "中性"
+            }}</span>
           </template>
         </el-table-column>
-        <el-table-column sortable prop="boarding" label="是否寄宿" width="150">
-          <template #default="scope">
-            <span>{{ scope.row.boarding }}</span>
-          </template>
-        </el-table-column>
+
         <el-table-column
           sortable
           prop="createdatetime"
@@ -120,12 +106,27 @@
           width="150"
         >
           <template #default="scope">
-            <span>{{ Times.reTime(scope.row.createdatetime) }}</span>
+            <span>{{ Times.reTime(scope.row.createTime) }}</span>
           </template>
         </el-table-column>
         <el-table-column sortable prop="role" label="身份" width="150">
           <template #default="scope">
-            <span>{{ scope.row.role }}</span>
+            <span>{{ scope.row.IDcard }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column sortable prop="role" label="地址" width="150">
+          <template #default="scope">
+            <span>{{ scope.row.place }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column sortable prop="role" label="QQ" width="150">
+          <template #default="scope">
+            <span>{{ scope.row.QQ }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column sortable prop="role" label="微信" width="150">
+          <template #default="scope">
+            <span>{{ scope.row.WX }}</span>
           </template>
         </el-table-column>
 
@@ -203,7 +204,7 @@ export default defineComponent({
     const InformationPopup = ref();
     // 查看、修改信息
     let handleEdit = (index: number, row: TeacherList) => {
-      console.log(Data.teacherListData.page)
+      console.log(Data.teacherListData.page);
       let Datas = Data.tableData[Data.teacherListData.page - 1][index];
       // 调用弹窗
       InformationPopup.value.changeBoon(Datas, false, "teacherList");
@@ -222,8 +223,6 @@ export default defineComponent({
     };
   },
 });
-
-// {"name":"张茵梅","sex":"0","phone":"15974278680","QQ":"1274512534","WX":"xgaw2","place":"校内教师公寓E201","IDcard":"442811198402114126",}
 </script>
 
 <style lang="scss" scoped></style>

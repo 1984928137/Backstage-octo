@@ -319,7 +319,7 @@ class InitData {
         this.teacherListData.count = jsonData.value?.result.length;
         this.splitArray(jsonData.value?.result);
         // 列标题，逗号隔开，每一个逗号就是隔开一个单元格
-        let str = `学号,姓名,电话,邮箱\n`;
+        let str = `姓名,性别,电话,QQ,微信,地址,身份证\n`;
         // 增加\t为了不让表格显示科学计数法或者其他格式
         for (let i = 0; i < jsonData.value?.result.length; i++) {
             for (let key in jsonData.value?.result[i]) {
@@ -330,7 +330,14 @@ class InitData {
                     console.log(jsonData.value.result[i][key][0],
                         Object.prototype.toString.call(jsonData.value.result[i][key]) == "[object Array]")
                 }
-                str += `${jsonData.value.result[i][key] + '\t'},`;
+                // if (key == 'sex') {
+                //     // sex == 0 ? "女" : scope.row.sex == 1 ? "男" : "中性"
+                //     str += `${jsonData.value.result[i][key] + '\t'},`;
+                // }
+                key == 'sex' ? str += `${jsonData.value.result[i][key] == 0 ? "女"
+                    : jsonData.value.result[i][key] == 1 ? "男"
+                        : "中性" + '\t'},`
+                    : str += `${jsonData.value.result[i][key] + '\t'},`
             }
             str += '\n';
         }
@@ -341,7 +348,7 @@ class InitData {
         const link = document.createElement("a");
         link.href = uri;
         // 对下载的文件命名
-        link.download = "学生信息表.csv";
+        link.download = "老师信息表.csv";
         link.click();
     }
 }

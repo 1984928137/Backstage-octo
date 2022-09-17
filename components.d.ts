@@ -49,6 +49,7 @@ declare module '@vue/runtime-core' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
+    ElTimeSelect: typeof import('element-plus/es')['ElTimeSelect']
     ElTree: typeof import('element-plus/es')['ElTree']
     FamilyChange: typeof import('./src/components/common_cpn/familyChange.vue')['default']
     Header: typeof import('./src/components/common_cpn/header.vue')['default']

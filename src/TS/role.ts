@@ -1,4 +1,4 @@
-import { ref, reactive, toRefs } from "vue";
+import { ref, reactive, toRefs, Ref } from "vue";
 import { useRouter } from "vue-router";
 import type { ElTable } from 'element-plus'
 import { ro } from "element-plus/lib/locale";
@@ -25,9 +25,31 @@ interface QuireRole {
 
 
 class InitRole {
-    // constructor() {
+    startTime: Ref
+    endTime: Ref
+    isShow: Ref<boolean>
+    isDateShow: Ref<boolean>
+    isNameShow: Ref<boolean>
+    examDate: Ref
+    examName: Ref
+    fromVal: any
 
-    // }
+    constructor() {
+        this.startTime = ref('')
+        this.endTime = ref('')
+
+        this.examDate = ref('')
+        this.examName = ref('')
+        this.isShow = ref(true)
+        this.isDateShow = ref(true)
+        this.isNameShow = ref(true)
+        this.fromVal = {
+            startTime: '',
+            endTime: "",
+            examDate: '',
+            examName: ''
+        }
+    }
     quireRole: QuireRole = {
         name: '',
         role: ''
@@ -41,14 +63,14 @@ class InitRole {
         count: 0,
         createdatetime: new Date(),
         isShow: true,
-        
+
     }
 
     obj = ref<object>()
 
     tableData = ref<RoleData[][]>([])
 
-    options:selectRole[] =[
+    options: selectRole[] = [
         {
             value: '学生',
             label: '学生',
@@ -86,7 +108,7 @@ class InitRole {
         count: 0,
         createdatetime: new Date(),
         isShow: true,
-        
+
     })
 
     router = ref(useRouter())
@@ -164,11 +186,11 @@ class InitRole {
     handleChange = (index: number, row: RoleData) => {
         console.log(index, row)
         this.router.value.push({
-            path:'/permission',
-            query:{
-                name:row.name,
+            path: '/permission',
+            query: {
+                name: row.name,
                 permission: row.permission,
-                role:row.role
+                role: row.role
             }
         })
     }
@@ -181,8 +203,11 @@ class InitRole {
         this.currentRow.value = val
     }
 
-    confirm = () => {
+    confirm = (index?: number, row?: RoleData) => {
         this.dialogFormVisible.value = true
+
+        this.fromVal = JSON.parse(JSON.stringify(row))
+        console.log(index, this.fromVal)
         // this.age[index].value = undefined
         // this.name[index].value = undefined
         // this.permission[index].value = undefined
@@ -208,6 +233,9 @@ class InitRole {
         }
         // this.fromPermission.value  = [...this.tableData.value]
         console.log('splitArray', this.tableData.value)
+    }
+    vats = () => {
+        console.log('删除', this.fromVal)
     }
 
     addRole = () => {

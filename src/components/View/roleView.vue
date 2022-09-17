@@ -30,6 +30,8 @@
           </el-form-item>
         </el-form>
       </div>
+
+      <!--  -->
       <div class="select-table">
         <el-table
           ref="userTableRef"
@@ -91,33 +93,132 @@
               <el-button
                 size="small"
                 type="success"
-                @click="handleChange(scope.$index, scope.row)"
-                >修改权限</el-button
-              >
-              <!-- <el-button
-                size="small"
-                type="success"
                 @click="confirm(scope.$index, scope.row)"
-                >确认</el-button
-              > -->
+                >修改</el-button
+              >
+              <el-button size="small" type="success" @click="vats()"
+                >删除</el-button
+              >
             </template>
           </el-table-column>
         </el-table>
       </div>
     </div>
+
+    <!-- 弹窗 -->
     <el-dialog v-model="dialogFormVisible" title="Shipping address">
-      <el-form :model="fromPermission">
-        <el-form-item label="Promotion name" :label-width="formLabelWidth">
-          <el-input v-model="fromPermission.name" autocomplete="off" />
+      <el-form :model="fromVal">
+        <el-form-item label="考试名称" :label-width="formLabelWidth">
+          <div v-show="isNameShow">
+            <div>
+              <span>
+                {{
+                  fromVal.examName == "" ? "还未填写考试名称" : fromVal.examName
+                }}
+              </span>
+            </div>
+            <el-button
+              size="small"
+              type="success"
+              @click="isNameShow = !isNameShow"
+              >填写</el-button
+            >
+          </div>
+          <div v-show="!isNameShow">
+            <div>
+              <el-input v-model="fromVal.examName" autocomplete="off" />
+            </div>
+            <el-button
+              size="small"
+              type="success"
+              @click="isNameShow = !isNameShow"
+              >确定</el-button
+            >
+          </div>
         </el-form-item>
-        <el-form-item label="Zones" :label-width="formLabelWidth">
+        <el-form-item label="考试日期" :label-width="formLabelWidth">
+          <!-- <el-input v-model="fromPermission.role" autocomplete="off" /> -->
+          <div v-show="isDateShow">
+            <div>
+              <span>
+                {{
+                  fromVal.examDate == ""
+                    ? "还未选择日期"
+                    :  fromVal.examDate == undefined
+                    ? "还未选择日期"
+                    :  Time.reDate(fromVal.examDate) 
+                }}
+              </span>
+            </div>
+            <el-button
+              size="small"
+              type="success"
+              @click="isDateShow = !isDateShow"
+              >选择时间</el-button
+            >
+          </div>
+          <div v-show="!isDateShow">
+            <div>
+              <el-date-picker
+                v-model="fromVal.examDate"
+                type="date"
+                placeholder="时间"
+              />
+            </div>
+            <el-button
+              size="small"
+              type="success"
+              @click="isDateShow = !isDateShow"
+              >确定</el-button
+            >
+          </div>
+        </el-form-item>
+        <el-form-item label="考试时间" :label-width="formLabelWidth">
+          <div v-show="!isShow">
+            <div>
+              <el-time-select
+                v-model="fromVal.startTime"
+                :max-time="fromVal.endTime"
+                class="mr-4"
+                placeholder="Start time"
+                start="08:00"
+                step="00:15"
+                end="18:30"
+              />
+              <el-time-select
+                v-model="fromVal.endTime"
+                :min-time="fromVal.startTime"
+                placeholder="End time"
+                start="08:00"
+                step="00:15"
+                end="18:30"
+              />
+            </div>
+            <el-button size="small" type="success" @click="isShow = !isShow"
+              >确定</el-button
+            >
+          </div>
+          <div v-show="isShow">
+            <div>
+              <span
+                >{{ fromVal.startTime == "" ? "00:00" : fromVal.startTime }}--{{
+                  fromVal.endTime == "" ? "00:00" : fromVal.endTime
+                }}</span
+              >
+            </div>
+            <el-button size="small" type="success" @click="isShow = !isShow"
+              >选择时间</el-button
+            >
+          </div>
+        </el-form-item>
+        <el-form-item label="考试人数" :label-width="formLabelWidth">
           <el-input v-model="fromPermission.role" autocomplete="off" />
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogFormVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="addRole">Confirm</el-button>
+          <el-button type="primary" @click="vats">Confirm</el-button>
         </span>
       </template>
     </el-dialog>
@@ -148,11 +249,13 @@ import {
 } from "vue";
 import { exRequest, RouterAPI } from "../../axios/api";
 import { InitRole } from "../../TS/role";
+import { TimeInit } from "../../TS/commons/time";
 
 export default defineComponent({
   name: "",
   setup() {
     const data = reactive(new InitRole());
+    const Time = new TimeInit();
     function getRole() {
       return exRequest.get({
         url: RouterAPI.UserMenus,
@@ -182,6 +285,7 @@ export default defineComponent({
     });
     return {
       ...toRefs(data),
+      Time,
     };
   },
 });

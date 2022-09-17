@@ -63,6 +63,10 @@ class TimeInit {
         // let json_date = new Date(date).toJSON();
         // return new Date(new Date(json_date) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '') 
     }
+    reDate = (data: string | number | Date)=>{
+        let time =  this.reTime(data)
+        return time.slice(0,10)
+    }
 }
 
 
