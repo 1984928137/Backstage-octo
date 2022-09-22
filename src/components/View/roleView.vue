@@ -136,6 +136,49 @@
             >
           </div>
         </el-form-item>
+        <el-form-item label="监考老师" :label-width="formLabelWidth">
+          <div v-show="isTeachShow">
+            <div>
+              <span>
+                {{
+                  fromVal.examTeachName == ""
+                    ? "请“选择”监考老师"
+                    : fromVal.examTeachName
+                }}
+              </span>
+            </div>
+            <el-button
+              size="small"
+              type="success"
+              @click="isTeachShow = !isTeachShow"
+              >选择</el-button
+            >
+          </div>
+          <div v-show="!isTeachShow">
+            <div>
+              <el-select
+                v-model="fromVal.examTeachName"
+                class="m-2"
+                placeholder="Select"
+                size="large"
+              >
+                <el-option
+                  v-for="(item, index) in teacherListData"
+                  :key="index"
+                  :label="item.value"
+                  :value="item.value"
+                  :disabled="isDisabled == item.value"
+                />
+              </el-select>
+            </div>
+            <el-button
+              size="small"
+              type="success"
+              @click="isTeachShow = !isTeachShow"
+              >确定</el-button
+            >
+          </div>
+        </el-form-item>
         <el-form-item label="考试日期" :label-width="formLabelWidth">
           <!-- <el-input v-model="fromPermission.role" autocomplete="off" /> -->
           <div v-show="isDateShow">
@@ -144,9 +187,9 @@
                 {{
                   fromVal.examDate == ""
                     ? "还未选择日期"
-                    :  fromVal.examDate == undefined
+                    : fromVal.examDate == undefined
                     ? "还未选择日期"
-                    :  Time.reDate(fromVal.examDate) 
+                    : Time.reDate(fromVal.examDate)
                 }}
               </span>
             </div>
@@ -267,6 +310,7 @@ export default defineComponent({
       console.log("onBeforeMount");
       const routerData: Ref = ref();
       routerData.value = await getRole();
+
       // .then((res) => {
       data.roleData.count = routerData.value?.result.length;
       for (let index = 0; index < routerData.value?.result.length; index++) {
@@ -277,6 +321,11 @@ export default defineComponent({
           .split(",");
       }
       data.splitArray(routerData.value.result);
+
+      // };
+      // as();
+      data.getRouterTeachData()
+      console.log(data.teacherListData);
       //   return res.data.result;
       // })
       // .catch((err) => {

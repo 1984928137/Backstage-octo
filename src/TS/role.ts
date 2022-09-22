@@ -1,5 +1,6 @@
 import { ref, reactive, toRefs, Ref } from "vue";
 import { useRouter } from "vue-router";
+import { RouterAPI, exRequest } from "../axios/api";
 import type { ElTable } from 'element-plus'
 import { ro } from "element-plus/lib/locale";
 
@@ -13,9 +14,15 @@ interface RoleData {
     isShow: boolean,
 }
 
-interface selectRole {
+interface SelectRole {
     value: string,
     label: string
+}
+
+interface SelectOpn {
+    value: any,
+    // label: any
+    time: string | Date
 }
 
 interface QuireRole {
@@ -25,14 +32,19 @@ interface QuireRole {
 
 
 class InitRole {
-    startTime: Ref
-    endTime: Ref
+    startTime: Ref<string>
+    endTime: Ref<string>
+    routerTeachData: Ref
     isShow: Ref<boolean>
     isDateShow: Ref<boolean>
     isNameShow: Ref<boolean>
+    isTeachShow: Ref<boolean>
+    isDisabled: Ref<string>
     examDate: Ref
     examName: Ref
+    examTeachName: Ref
     fromVal: any
+    teacherListData: SelectOpn[]
 
     constructor() {
         this.startTime = ref('')
@@ -40,15 +52,29 @@ class InitRole {
 
         this.examDate = ref('')
         this.examName = ref('')
+        this.examTeachName = ref('')
+        this.isDisabled = ref('')
+        this.routerTeachData = ref()
         this.isShow = ref(true)
         this.isDateShow = ref(true)
         this.isNameShow = ref(true)
+        this.isTeachShow = ref(true)
+        this.teacherListData = [
+            {
+                value: '',
+                // label: '',
+                time: ''
+            }
+        ]
         this.fromVal = {
             startTime: '',
             endTime: "",
             examDate: '',
-            examName: ''
+            examName: '',
+            examTeachName: '',
+            teacherListData: this.teacherListData
         }
+
     }
     quireRole: QuireRole = {
         name: '',
@@ -70,7 +96,7 @@ class InitRole {
 
     tableData = ref<RoleData[][]>([])
 
-    options: selectRole[] = [
+    options: SelectRole[] = [
         {
             value: '学生',
             label: '学生',
@@ -164,6 +190,27 @@ class InitRole {
     )
 
 
+    getTeacherListData = () => {
+        return exRequest.get({
+            url: RouterAPI.TeacherList,
+            data: "",
+        });
+    }
+
+    getRouterTeachData = async () => {
+        this.routerTeachData.value = await this.getTeacherListData();
+        // const as = () => {
+        this.teacherListData = this.routerTeachData.value?.result.map((v: any) => {
+            console.log(v.name);
+
+            return {
+                valeu: v.name,
+                label: v.name,
+            };
+        });
+        console.log(this.teacherListData)
+    }
+
     onSubmit = () => {
         console.log('submit!')
     }
@@ -205,8 +252,10 @@ class InitRole {
 
     confirm = (index?: number, row?: RoleData) => {
         this.dialogFormVisible.value = true
+        if (row) {
+            this.fromVal = JSON.parse(JSON.stringify(row))
+        }
 
-        this.fromVal = JSON.parse(JSON.stringify(row))
         console.log(index, this.fromVal)
         // this.age[index].value = undefined
         // this.name[index].value = undefined

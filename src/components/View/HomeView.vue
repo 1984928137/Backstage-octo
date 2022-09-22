@@ -25,9 +25,11 @@ export default defineComponent({
   setup() {
     // const document = ref(new Document())
     const data = reactive(new InitHome());
-    
+    // const keyDown = (e:any)=>{
+    //   console.log(e)
+    // }
+    // document.onkeydown = keyDown
     // const props = defineProps<{ msg: string }>()
-
     return {
       ...toRefs(data),
       Header,

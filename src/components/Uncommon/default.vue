@@ -166,7 +166,7 @@ export default defineComponent({
     const data = reactive(new InitData());
     const Time = reactive(new TimeInit());
     let { year, month, day, hour, min, sec } = Time;
-
+    // console.log(window.onkeydown)
     const updateTime = () => {
       // data.NextTime = Time.formatDate()
       data.flipDown();

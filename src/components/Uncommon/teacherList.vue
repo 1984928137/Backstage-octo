@@ -39,12 +39,12 @@
             <el-button type="primary" @click="onRestoreClick"
               >取消查询</el-button
             >
-            <el-button type="primary" @click="toggleSelection()"
-              >清除全选</el-button
-            >
           </div>
         </el-form-item>
-        <el-form-item class="dateItem">
+        <el-form-item class="dateItem"
+          ><el-button type="primary" @click="toggleSelection()"
+            >清除全选</el-button
+          >
           <el-button type="primary" @click="AddNews">添加老师信息</el-button>
           <el-button type="primary" @click="tableToExcel">导出</el-button>
         </el-form-item>
@@ -66,7 +66,7 @@
         }"
       >
         <el-table-column type="selection" width="55" />
-        
+
         <!-- <el-table-column sortable prop="TeacherID" label="学号" width="150">
           <template #default="scope">
            
@@ -214,6 +214,11 @@ export default defineComponent({
       // 调用弹窗
       InformationPopup.value.changeBoon(Data.formData, true, "teacherList");
     };
+
+    const keyDown = (e: any) => {
+      console.log(e.key, e.keyCode);
+    };
+    document.onkeydown = keyDown;
     return {
       ...toRefs(Data),
       InformationPopup,
@@ -225,4 +230,39 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+:deep(.cell) {
+  text-align: center;
+}
+.select-table {
+  height: 400px;
+}
+:deep(.table-heigth) {
+  height: 50px;
+}
+
+.dateItem {
+  margin-right: 18px;
+}
+.dateItem.btn-w {
+  width: 200px;
+}
+.btn-df {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  margin-left: 10px;
+}
+.el-button {
+  margin-bottom: 7px;
+  margin-left: 10px;
+}
+.anyField {
+  width: 270px;
+  height: 40px;
+}
+.FieldSelect {
+  width: 130px;
+}
+</style>

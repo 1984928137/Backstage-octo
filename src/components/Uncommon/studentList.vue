@@ -40,12 +40,12 @@
             <el-button type="primary" @click="onRestoreClick"
               >取消查询</el-button
             >
-            <el-button type="primary" @click="toggleSelection()"
-              >清除全选</el-button
-            >
           </div>
         </el-form-item>
-        <el-form-item class="dateItem">
+        <el-form-item class="dateItem"
+          ><el-button type="primary" @click="toggleSelection()"
+            >清除全选</el-button
+          >
           <el-button type="primary" @click="AddNews">添加学生信息</el-button>
           <el-button type="primary" @click="tableToExcel">导出</el-button>
         </el-form-item>
@@ -252,9 +252,12 @@ export default defineComponent({
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
+  margin-top: 8px;
+  margin-left: 10px;
 }
 .el-button {
   margin-bottom: 7px;
+  margin-left: 10px;
 }
 .anyField {
   width: 270px;
